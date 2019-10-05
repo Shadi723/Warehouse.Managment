@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductsActivity">
+
+    <EditText
+        android:id="@+id/editText_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:hint="Product Name"/>
+
+    <EditText
+        android:id="@+id/editText_product_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_product_name"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:hint="Product Desc"/>
+
+    <EditText
+        android:id="@+id/editText_product_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_product_desc"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:hint="Product Quantity"/>
+
+    <EditText
+        android:id="@+id/editText_product_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_product_quantity"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:hint="Product Weight"/>
+
+    <Button
+        android:id="@+id/btn_add_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_product_weight"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:text="Add Product"/>
+
+    <TextView
+        android:id="@+id/txtView_all_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_add_product"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:text="All Products"/>
+
+
+    <ListView
+        android:id="@+id/listView_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtView_all_products"
+        />
+
+</RelativeLayout>
