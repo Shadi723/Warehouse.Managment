@@ -3,4 +3,9 @@
 
 
     <string name="app_logo">iStock\nManagement</string>
+    <string name="hint_edit_text_username">Username or Email</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_buy">Buy</string>
+    <string name="divider_or">OR</string>
+    <string name="hint_edit_text_password">Password</string>
 </resources>

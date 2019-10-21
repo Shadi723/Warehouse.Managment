@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/txtView_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/font_logo2"
+        android:gravity="center_horizontal"
+        android:text="@string/app_logo"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTxt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtView_logo"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edit_text_standard"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/hint_edit_text_username"
+        android:inputType="textEmailAddress"
+        android:importantForAutofill="no"
+        android:padding="12dp" />
+
+    <EditText
+        android:id="@+id/editTxt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTxt_username"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edit_text_standard"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/hint_edit_text_password"
+        android:inputType="textPassword"
+        android:importantForAutofill="no"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTxt_password"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_primary_states"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/btn_login"
+        android:textColor="@color/color_white" />
+
+    <!-- Divider container -->
+    <RelativeLayout
+        android:id="@+id/layout_divider"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/btn_login"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:layout_toStartOf="@id/txtView_or"
+            android:layout_toLeftOf="@id/txtView_or"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/txtView_or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:gravity="center_horizontal"
+            android:text="@string/divider_or"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/txtView_or"
+            android:layout_toRightOf="@id/txtView_or"
+            android:background="@color/colorPrimary" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_divider"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_secondary_states"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/btn_buy"
+        android:textColor="@color/colorPrimary" />
+
+</RelativeLayout>
+

@@ -5,5 +5,15 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="splashBackground">#4651B9</color>
+    <color name="colorBackground">#F5F5F5</color>
+
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_grey">#B8B8B8</color>
+
+    <color name="button_primary_enabled">#4651B9</color>
+    <color name="button_primary_disabled">#757ED1</color>
+
+    <color name="button_secondary_enabled">#757ED1</color>
+    <color name="button_secondary_disabled">#757ED1</color>
 
 </resources>
