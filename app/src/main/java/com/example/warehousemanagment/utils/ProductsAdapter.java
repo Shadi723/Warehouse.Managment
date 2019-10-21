@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.example.warehousemanagment.R;
 import com.example.warehousemanagment.models.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsAdapter extends ArrayAdapter<Product> {
@@ -47,8 +46,6 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
             productDescTxtView.setText(currentItem.getDescription());
             productQuantityTxtView.setText(currentItem.getQuantity());
             productWeightTxtView.setText(currentItem.getWeight());
-
-
         }
 
         return listItemView;

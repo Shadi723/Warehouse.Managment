@@ -33,7 +33,6 @@ public class ProductsActivity extends AppCompatActivity {
     private ListView productsListView;
     private List<Product> productList;
 
-
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
@@ -48,7 +47,6 @@ public class ProductsActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("ALI-COMPANY").child("Products");
-
     }
 
     @Override
