@@ -56,4 +56,9 @@
     <string name="field_unite">unite</string>
     <string name="inside_package_count">Enter Package Total Size/Count</string>
     <string name="field_total_quantity">total_quantity</string>
+    <string name="sold_product">SoldProducts</string>
+    <string name="scan_new_barcode_in">Scan Product For Store</string>
+    <string name="scan_new_barcode_out">Scan Product Out Of Store</string>
+    <string name="requsted_quantity_not_exist">The quantity requested is not available</string>
+    <string name="product_does_not_exist">This product does not exist at your Store!</string>
 </resources>

@@ -7,12 +7,23 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/ScanBarcode"
-        android:layout_width="wrap_content"
+        android:id="@+id/ScanBarcodeIn"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="62dp"
-        android:text="@string/scan_new_barcode"
+        android:text="@string/scan_new_barcode_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ScanBarcodeOut"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/scan_new_barcode_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScanBarcodeIn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

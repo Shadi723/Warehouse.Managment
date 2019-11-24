@@ -12,6 +12,12 @@
         <action
             android:id="@+id/action_mainFragment_to_scanBarcodeIn"
             app:destination="@id/scanBarcodeIn" />
+        <action
+            android:id="@+id/action_mainFragment_to_scanBarcodeOut"
+            app:destination="@id/scanBarcodeOut" />
+        <action
+            android:id="@+id/action_mainFragment_to_addNewProduct"
+            app:destination="@id/addNewProduct" />
     </fragment>
     <fragment
         android:id="@+id/scanBarcodeIn"
@@ -65,4 +71,25 @@
             android:id="@+id/action_goToScanDialog_to_scanBarcodeIn"
             app:destination="@id/scanBarcodeIn" />
     </dialog>
+    <fragment
+        android:id="@+id/scanBarcodeOut"
+        android:name="com.example.warehousemanagment.Shadi.ScanBarcode.ScanBarcodeOut"
+        android:label="scan_barode_out_fragment_layout"
+        tools:layout="@layout/scan_barode_out_fragment_layout" >
+        <action
+            android:id="@+id/action_scanBarcodeOut_to_saveToFirebaseOut"
+            app:destination="@id/saveToFirebaseOut" />
+        <action
+            android:id="@+id/action_scanBarcodeOut_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveToFirebaseOut"
+        android:name="com.example.warehousemanagment.Shadi.ScanBarcode.SaveToFirebaseOut"
+        android:label="save_to_firebase_out_fragment_layout"
+        tools:layout="@layout/save_to_firebase_out_fragment_layout" >
+        <action
+            android:id="@+id/action_saveToFirebaseOut_to_goToScanDialog"
+            app:destination="@id/goToScanDialog" />
+    </fragment>
 </navigation>

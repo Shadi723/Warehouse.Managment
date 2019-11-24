@@ -166,7 +166,7 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getValue() != null) {
-                            total_quantity = inner_count + dataSnapshot.getValue(Integer.class);
+                            total_quantity = inner_count*count + dataSnapshot.getValue(Integer.class);
                             mRef.child(getString(R.string.company_name))
                                     .child(getString(R.string.stock))
                                     .child(settings.getTrademark().getName())
@@ -180,7 +180,7 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
                                     .child(settings.getTrademark().getName())
                                     .child(String.valueOf(settings.getProduct().getId()))
                                     .child(getString(R.string.field_total_quantity))
-                                    .setValue(inner_count);
+                                    .setValue(inner_count*count);
                         }
                     }
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import androidx.navigation.Navigation;
 import com.example.warehousemanagment.R;
 import com.example.warehousemanagment.Shadi.Models.IncomeProduct;
 import com.example.warehousemanagment.Shadi.Models.ProductSettings;
+import com.example.warehousemanagment.Shadi.Models.SoldProduct;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,7 +59,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.save_to_firebase_in_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.save_to_firebase_out_fragment_layout, container, false);
         id = view.findViewById(R.id.product_id);
         name = view.findViewById(R.id.product_name);
         color = view.findViewById(R.id.product_color);
@@ -102,59 +104,65 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
             if(!packageCount.getText().toString().equals("") && !packgeIn.getText().toString().equals("")){
                 final int count = Integer.parseInt(packageCount.getText().toString());
                 final float inner_count = Float.parseFloat((packgeIn.getText().toString()));
-
-                IncomeProduct income = new IncomeProduct();
-                income.setDate(new Date());
-                income.setUser_name("ahmed");
-                income.setPackage_number(count);
-                income.setInside_package_number(inner_count);
-                income.setSeller(getString(R.string.company_name));
-                income.setTrademark(settings.getTrademark().getName());
-                mRef = FirebaseDatabase.getInstance().getReference();
-                //saving product in incoming table
-                mRef.child(getString(R.string.company_name))
-                        .child(getString(R.string.incoming_product))
-                        .child(String.valueOf(settings.getProduct().getId()))
-                        .push()
-                        .setValue(income);
-                // updating total count
-                // TODO total count 0
-                Query query1 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
-                        .child(getString(R.string.stock))
-                        .child(String.valueOf(settings.getProduct().getId()))
-                        .child(getString(R.string.field_total_count));
-                query1.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getKey() == getString(R.string.field_total_count)) {
-                            total_package = count + dataSnapshot.getValue(Integer.class);
-                            mRef.child(getString(R.string.company_name))
-                                    .child(getString(R.string.stock))
-                                    .child(String.valueOf(settings.getProduct().getId()))
-                                    .child(getString(R.string.field_total_count))
-                                    .setValue(total_package);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
                 Query query2 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
                         .child(getString(R.string.stock))
+                        .child(settings.getTrademark().getName())
                         .child(String.valueOf(settings.getProduct().getId()))
                         .child(getString(R.string.field_total_quantity));
                 query2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getKey() == getString(R.string.field_total_quantity)) {
-                            total_quantity = inner_count + dataSnapshot.getValue(Integer.class);
-                            mRef.child(getString(R.string.company_name))
-                                    .child(getString(R.string.stock))
-                                    .child(String.valueOf(settings.getProduct().getId()))
-                                    .child(getString(R.string.field_total_quantity))
-                                    .setValue(total_quantity);
+                        if(dataSnapshot.getKey().equals(getString(R.string.field_total_quantity))) {
+                            Log.d(TAG, "onDataChange: " + dataSnapshot.getValue() + settings.getProduct().getId());
+                            total_quantity =  dataSnapshot.getValue(Integer.class);
+                            if(count*inner_count <= total_quantity){
+                                total_quantity = total_quantity - inner_count*count;
+                                Query query1 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
+                                        .child(getString(R.string.stock))
+                                        .child(settings.getTrademark().getName())
+                                        .child(String.valueOf(settings.getProduct().getId()))
+                                        .child(getString(R.string.field_total_count));
+                                query1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(dataSnapshot.getKey() == getString(R.string.field_total_count)) {
+                                            total_package =  dataSnapshot.getValue(Integer.class) - count;
+                                            mRef.child(getString(R.string.company_name))
+                                                    .child(getString(R.string.stock))
+                                                    .child(settings.getTrademark().getName())
+                                                    .child(String.valueOf(settings.getProduct().getId()))
+                                                    .child(getString(R.string.field_total_count))
+                                                    .setValue(total_package);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                mRef.child(getString(R.string.company_name))
+                                        .child(getString(R.string.stock))
+                                        .child(settings.getTrademark().getName())
+                                        .child(String.valueOf(settings.getProduct().getId()))
+                                        .child(getString(R.string.field_total_quantity))
+                                        .setValue(total_quantity);
+
+                                SoldProduct sold = new SoldProduct();
+                                sold.setDate(new Date());
+                                sold.setUser_name("ahmed");
+                                sold.setPackage_count(count);
+                                sold.setTrademaek(settings.getTrademark().getName());
+                                mRef = FirebaseDatabase.getInstance().getReference();
+                                mRef.child(getString(R.string.company_name))
+                                        .child(getString(R.string.sold_product))
+                                        .child(String.valueOf(settings.getProduct().getId()))
+                                        .push()
+                                        .setValue(sold);
+                            }
+                            else {
+                                Toast.makeText(getContext(),getContext().getString(R.string.requsted_quantity_not_exist),Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
 
@@ -163,7 +171,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
 
                     }
                 });
-                navController.navigate(R.id.action_saveToFirebaseIn_to_goToScanDialog);
+                navController.navigate(R.id.action_saveToFirebaseOut_to_goToScanDialog);
             }
             else {
                 if(packageCount.getText() == null){
