@@ -12,17 +12,19 @@ public class IncomeProduct implements Parcelable {
     private String trademark;
     private String Seller;
     private float inside_package_number;
+    private float total_quantity;
 
     public IncomeProduct() {
     }
 
-    public IncomeProduct(String user_name, int package_number, Date date, String trademark, String seller, float inside_package_number) {
+    public IncomeProduct(String user_name, int package_number, Date date, String trademark, String seller, float inside_package_number, float total_quantity) {
         this.user_name = user_name;
         this.package_number = package_number;
         this.date = date;
         this.trademark = trademark;
         Seller = seller;
         this.inside_package_number = inside_package_number;
+        this.total_quantity = total_quantity;
     }
 
     protected IncomeProduct(Parcel in) {
@@ -31,6 +33,7 @@ public class IncomeProduct implements Parcelable {
         trademark = in.readString();
         Seller = in.readString();
         inside_package_number = in.readFloat();
+        total_quantity = in.readFloat();
     }
 
     @Override
@@ -40,6 +43,7 @@ public class IncomeProduct implements Parcelable {
         dest.writeString(trademark);
         dest.writeString(Seller);
         dest.writeFloat(inside_package_number);
+        dest.writeFloat(total_quantity);
     }
 
     @Override
@@ -58,6 +62,14 @@ public class IncomeProduct implements Parcelable {
             return new IncomeProduct[size];
         }
     };
+
+    public float getTotal_quantity() {
+        return total_quantity;
+    }
+
+    public void setTotal_quantity(float total_quantity) {
+        this.total_quantity = total_quantity;
+    }
 
     public String getUser_name() {
         return user_name;

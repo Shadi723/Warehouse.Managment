@@ -11,21 +11,26 @@ public class SoldProduct implements Parcelable {
     private Date date;
     private String client;
     private String trademaek;
+    private float total_quantity;
 
     public SoldProduct() {
     }
 
-    public SoldProduct(String user_name, int package_count, Date date, String client, String trademaek) {
+    public SoldProduct(String user_name, int package_count, Date date, String client, String trademaek, float total_quantity) {
         this.user_name = user_name;
         this.package_count = package_count;
         this.date = date;
         this.client = client;
         this.trademaek = trademaek;
+        this.total_quantity = total_quantity;
     }
 
     protected SoldProduct(Parcel in) {
         user_name = in.readString();
         package_count = in.readInt();
+        client = in.readString();
+        trademaek = in.readString();
+        total_quantity = in.readFloat();
     }
 
     public static final Creator<SoldProduct> CREATOR = new Creator<SoldProduct>() {
@@ -39,6 +44,14 @@ public class SoldProduct implements Parcelable {
             return new SoldProduct[size];
         }
     };
+
+    public float getTotal_quantity() {
+        return total_quantity;
+    }
+
+    public void setTotal_quantity(float total_quantity) {
+        this.total_quantity = total_quantity;
+    }
 
     public String getUser_name() {
         return user_name;
@@ -80,6 +93,7 @@ public class SoldProduct implements Parcelable {
         this.trademaek = trademaek;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -89,5 +103,8 @@ public class SoldProduct implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(user_name);
         dest.writeInt(package_count);
+        dest.writeString(client);
+        dest.writeString(trademaek);
+        dest.writeFloat(total_quantity);
     }
 }

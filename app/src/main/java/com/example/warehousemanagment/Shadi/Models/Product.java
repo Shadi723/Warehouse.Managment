@@ -16,11 +16,12 @@ public class Product implements Parcelable {
     private float kg;
     private int inner_count;
     private String  unite;
+    private String trademark;
 
     public Product() {
     }
 
-    public Product(int id, String name, String color, String category, String type, String imgUrl, float width, float height, float depth, float kg, int inner_count, String unite) {
+    public Product(int id, String name, String color, String category, String type, String imgUrl, float width, float height, float depth, float kg, int inner_count, String unite, String trademark) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -33,6 +34,7 @@ public class Product implements Parcelable {
         this.kg = kg;
         this.inner_count = inner_count;
         this.unite = unite;
+        this.trademark = trademark;
     }
 
     protected Product(Parcel in) {
@@ -158,6 +160,13 @@ public class Product implements Parcelable {
         this.unite = unite;
     }
 
+    public String getTrademark() {
+        return trademark;
+    }
+
+    public void setTrademark(String trademark) {
+        this.trademark = trademark;
+    }
 
     @Override
     public int describeContents() {
@@ -178,5 +187,6 @@ public class Product implements Parcelable {
         dest.writeFloat(kg);
         dest.writeInt(inner_count);
         dest.writeString(unite);
+        dest.writeString(trademark);
     }
 }

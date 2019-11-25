@@ -5,25 +5,37 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.warehousemanagment.R;
 import com.example.warehousemanagment.Shadi.Models.Product;
+import com.example.warehousemanagment.Shadi.Models.Trademark;
 import com.example.warehousemanagment.Shadi.Utils.UniversalImageLoader;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +46,11 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
     EditText product_id, product_name, product_color, product_depth, product_height, product_weight, product_width, package_inside;
     Button save;
     ImageView img_load;
+    Spinner trade;
     NavController navController;
-
     boolean img_loaded = false;
 
+    private static final String TAG = "AddNewProduct";
     //firebase
 
     FirebaseDatabase firebaseDatabase;
@@ -61,12 +74,13 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
         product_width = view.findViewById(R.id.product_width);
         product_weight = view.findViewById(R.id.product_weight);
         package_inside = view.findViewById(R.id.package_inside);
+        trade = view.findViewById(R.id.product_trade);
         save = view.findViewById(R.id.save_product_new);
         img_load = view.findViewById(R.id.img_load);
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
         save.setOnClickListener(this);
         img_load.setOnClickListener(this);
-
+        getTrademarks();
         return view;
     }
 
@@ -86,10 +100,33 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
             product_id.setText(code);
             product_id.setFocusable(false);
         }
-
-
     }
 
+    private void getTrademarks(){
+        Query query = FirebaseDatabase.getInstance().getReference().child(getString(R.string.company_name))
+                .child(getString(R.string.field_trademark));
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> allTrades = new ArrayList<>();
+                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                    String trademark;
+                    trademark = ds.getValue(Trademark.class).getName();
+                    allTrades.add(trademark);
+
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),R.layout.spinner_simple_layout,allTrades);
+                trade.setAdapter(adapter);
+                trade.setSelection(0);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         if(v == save){
@@ -109,6 +146,7 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
                 product.setCategory("Pvc Profile");
                 if(img_loaded){
                     //save product
+                    product.setTrademark(trade.getSelectedItem().toString());
                     product.setImgUrl("http://site.com/image.png");
                     addProduct(product);
                     Toast.makeText(getContext(),getString(R.string.successfully_added),Toast.LENGTH_LONG).show();
@@ -149,6 +187,7 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
     private void addProduct(Product product) {
         mRef.child(getString(R.string.company_name))
                 .child(getString(R.string.field_products))
+                .child(product.getTrademark())
                 .child(String.valueOf(product.getId()))
                 .setValue(product);
 

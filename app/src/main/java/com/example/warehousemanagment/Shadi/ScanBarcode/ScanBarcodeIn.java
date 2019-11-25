@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableRow;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,7 +66,7 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
 
-        getInformation("1-60300-1");
+        getInformation("1-60300-2");
 
      /*   mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);*/
@@ -123,12 +125,13 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     ProductSettings settings = initWidgets(dataSnapshot);
-                    if (settings.getProduct().getId() != 0) {
+                    if (settings.getProduct().getId() != 0 ) {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("product", settings);
                         Log.d(TAG, "onDataChange: navigating to save to database");
                         navController.navigate(R.id.action_scanBarcodeIn_to_saveToFirebaseIn,bundle);
                     } else {
+                        Toast.makeText(getActivity(), getString(R.string.no_product_in_product_list), Toast.LENGTH_LONG).show();
                         showAddNewDialog(parts[1], parts[0]);
                     }
                 }
@@ -140,34 +143,47 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
         }
     }
 
-    private ProductSettings initWidgets(DataSnapshot dataSnapshot){
-        Product product = new Product();
+    private Trademark getTrademark(DataSnapshot dataSnapshot) {
         Trademark trademark = new Trademark();
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             //user_account_settings node
-            if (ds.getKey().equals(getString(R.string.field_products))) {
-                try {
-                    Map<String, Object> objectMap = (Map<String, Object>) ds.child(parts[1]).getValue();
-                    product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
-                    product.setName(objectMap.get(getString(R.string.field_name)).toString());
-                    product.setColor(objectMap.get(getString(R.string.field_color)).toString());
-                    product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
-                    product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
-                    product.setDepth(Float.parseFloat(objectMap.get(getString(R.string.field_depth)).toString()));
-                    product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
-                    product.setType(objectMap.get(getString(R.string.field_type)).toString());
-                    product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
-                    product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
-                    product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
-                    Log.d(TAG, "initWidgets: " + parts[1]);
-                }catch (NullPointerException e){
-                    Log.e(TAG, "initWidgets: " + e.toString() );
-                }
-            }
-               // Log.d(TAG, "initWidgets: "+ds.child(parts[1]).getValue(Product.class).getName());
-            if(ds.getKey().equals(getString(R.string.field_trademark))){
+            // Log.d(TAG, "initWidgets: "+ds.child(parts[1]).getValue(Product.class).getName());
+            if (ds.getKey().equals(getString(R.string.field_trademark))) {
                 trademark.setId(ds.child(parts[2]).getValue(Trademark.class).getId());
                 trademark.setName(ds.child(parts[2]).getValue(Trademark.class).getName());
+            }
+        }
+        return trademark;
+    }
+    private ProductSettings initWidgets(DataSnapshot dataSnapshot){
+        Product product = new Product();
+        Trademark trademark = getTrademark(dataSnapshot);
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            //user_account_settings node
+               // Log.d(TAG, "initWidgets: "+ds.child(parts[1]).getValue(Product.class).getName());
+            if (ds.getKey().equals(getString(R.string.field_products))) {
+                for(DataSnapshot single:ds.getChildren()){
+                    if(single.getKey().equals(trademark.getName())){
+                        Log.d(TAG, "initWidgets: inside" + single.getKey());
+                        try {
+                            Map<String, Object> objectMap = (Map<String, Object>) single.child(parts[1]).getValue();
+                            product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
+                            product.setName(objectMap.get(getString(R.string.field_name)).toString());
+                            product.setColor(objectMap.get(getString(R.string.field_color)).toString());
+                            product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
+                            product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
+                            product.setDepth(Float.parseFloat(objectMap.get(getString(R.string.field_depth)).toString()));
+                            product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
+                            product.setType(objectMap.get(getString(R.string.field_type)).toString());
+                            product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
+                            product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
+                            product.setTrademark(objectMap.get(getString(R.string.field_trademark)).toString());
+                            product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
+                        }catch (NullPointerException e){
+                            Log.e(TAG, "initWidgets: " + e.toString() );
+                        }
+                    }
+                }
             }
         }
         ProductSettings settings = new ProductSettings(product,trademark);

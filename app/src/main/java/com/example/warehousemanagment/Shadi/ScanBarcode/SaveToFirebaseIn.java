@@ -111,6 +111,7 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
                 income.setInside_package_number(inner_count);
                 income.setSeller(getString(R.string.company_name));
                 income.setTrademark(settings.getTrademark().getName());
+                income.setTotal_quantity(inner_count*count);
                 mRef = FirebaseDatabase.getInstance().getReference();
                 //saving product in incoming table
                 mRef.child(getString(R.string.company_name))

@@ -152,6 +152,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                                 sold.setDate(new Date());
                                 sold.setUser_name("ahmed");
                                 sold.setPackage_count(count);
+                                sold.setTotal_quantity(count*inner_count);
                                 sold.setTrademaek(settings.getTrademark().getName());
                                 mRef = FirebaseDatabase.getInstance().getReference();
                                 mRef.child(getString(R.string.company_name))

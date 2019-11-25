@@ -51,6 +51,18 @@
                     android:background="@drawable/ic_rounded_grey_inside"
                     android:textColor="#000"
                     android:layout_marginBottom="15dp"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/product_trade"
+                    android:layout_gravity="center"
+                    android:hint="@string/product_trade"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:background="@drawable/ic_rounded_grey_inside"
+                    android:textColor="#000"
+                    android:layout_marginBottom="15dp"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
