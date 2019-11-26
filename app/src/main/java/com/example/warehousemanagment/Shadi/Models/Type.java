@@ -1,17 +1,15 @@
 package com.example.warehousemanagment.Shadi.Models;
 
-public class Trademark {
+public class Type {
     private int id;
     private String name;
-    private String type;
 
-    public Trademark() {
+    public Type() {
     }
 
-    public Trademark(int id, String name, String type) {
+    public Type(int id, String name) {
         this.id = id;
         this.name = name;
-        this.type = type;
     }
 
     public int getId() {
@@ -30,11 +28,4 @@ public class Trademark {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

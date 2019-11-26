@@ -20,7 +20,7 @@ import androidx.navigation.Navigation;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
     NavController navController;
-    Button addNewProduct, sellProduct;
+    Button addToStore, sellProduct, addNewProduct,addNewTrademark;
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClass;
 
@@ -36,19 +36,29 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addNewProduct = view.findViewById(R.id.ScanBarcodeIn);
+        addToStore = view.findViewById(R.id.ScanBarcodeIn);
         sellProduct = view.findViewById(R.id.ScanBarcodeOut);
+        addNewProduct = view.findViewById(R.id.addNewProduct);
+        addNewTrademark = view.findViewById(R.id.addNewTrademark);
         checkPermession();
-        addNewProduct.setOnClickListener(this);
+        addToStore.setOnClickListener(this);
         sellProduct.setOnClickListener(this);
+        addNewProduct.setOnClickListener(this);
+        addNewTrademark.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
-        if(v == addNewProduct){
+        if(v == addToStore){
             navController.navigate(R.id.action_mainFragment_to_scanBarcodeIn);
         }
         if(v == sellProduct){
             navController.navigate(R.id.action_mainFragment_to_scanBarcodeOut);
+        }
+        if(v == addNewProduct){
+            navController.navigate(R.id.action_mainFragment_to_addNewProduct);
+        }
+        if(v == addNewTrademark){
+            navController.navigate(R.id.action_mainFragment_to_addNewTrademark);
         }
     }
 

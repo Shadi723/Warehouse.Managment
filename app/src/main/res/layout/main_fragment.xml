@@ -7,6 +7,16 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/addNewProduct"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/add_new_product_to_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/ScanBarcodeIn"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
@@ -14,16 +24,26 @@
         android:text="@string/scan_new_barcode_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/addNewProduct" />
 
     <Button
         android:id="@+id/ScanBarcodeOut"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="62dp"
         android:text="@string/scan_new_barcode_out"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ScanBarcodeIn" />
+        app:layout_constraintTop_toTopOf="@+id/ScanBarcodeIn" />
+
+    <Button
+        android:id="@+id/addNewTrademark"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/add_new_trademark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ScanBarcodeOut" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

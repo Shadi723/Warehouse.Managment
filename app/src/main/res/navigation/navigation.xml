@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addNewProduct"
             app:destination="@id/addNewProduct" />
+        <action
+            android:id="@+id/action_mainFragment_to_addNewTrademark"
+            app:destination="@id/addNewTrademark" />
     </fragment>
     <fragment
         android:id="@+id/scanBarcodeIn"
@@ -91,5 +94,14 @@
         <action
             android:id="@+id/action_saveToFirebaseOut_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewTrademark"
+        android:name="com.example.warehousemanagment.Shadi.AddNewProduct.AddNewTrademark"
+        android:label="add_new_trademark_fragment_layout"
+        tools:layout="@layout/add_new_trademark_fragment_layout" >
+        <action
+            android:id="@+id/action_addNewTrademark_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

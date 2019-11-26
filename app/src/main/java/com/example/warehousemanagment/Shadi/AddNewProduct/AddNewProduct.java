@@ -80,7 +80,6 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
         save.setOnClickListener(this);
         img_load.setOnClickListener(this);
-        getTrademarks();
         return view;
     }
 
@@ -89,31 +88,39 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRef = firebaseDatabase.getReference();
+        getTrademarks();
         initImageLoader();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String code = getArguments().getString("ProductCode");
-        if(code != null) {
-            product_id.setText(code);
-            product_id.setFocusable(false);
+        try{
+            String code = getArguments().getString("ProductCode");
+            if(code != null) {
+                product_id.setText(code);
+                product_id.setFocusable(false);
+            }
+        }catch (NullPointerException e){
+            Log.e(TAG, "onViewCreated: " + e.toString() );
         }
+
     }
 
     private void getTrademarks(){
-        Query query = FirebaseDatabase.getInstance().getReference().child(getString(R.string.company_name))
+        Query query1 = FirebaseDatabase.getInstance().getReference().child(getString(R.string.company_name))
                 .child(getString(R.string.field_trademark));
-        query.addValueEventListener(new ValueEventListener() {
+        query1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> allTrades = new ArrayList<>();
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
                     String trademark;
-                    trademark = ds.getValue(Trademark.class).getName();
-                    allTrades.add(trademark);
-
+                    Log.d(TAG, "onDataChange: "+ds.getValue(Trademark.class).getType());
+                    if(ds.getValue(Trademark.class).getType().equals("Pvc Profile")){
+                        trademark = ds.getValue(Trademark.class).getName();
+                        allTrades.add(trademark);
+                    }
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),R.layout.spinner_simple_layout,allTrades);

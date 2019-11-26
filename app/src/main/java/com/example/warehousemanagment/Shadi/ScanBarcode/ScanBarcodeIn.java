@@ -68,11 +68,11 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
 
         getInformation("1-60300-2");
 
-     /*   mScannerView = new ZXingScannerView(getContext());
+      /*  mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);*/
     }
-/*
-    @Override
+
+  /*  @Override
     public void onResume() {
         super.onResume();
         mScannerView.setResultHandler(this);                //Register  ourselves as handler for scan result

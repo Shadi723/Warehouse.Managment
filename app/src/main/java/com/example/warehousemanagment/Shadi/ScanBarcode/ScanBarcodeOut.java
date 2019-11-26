@@ -69,7 +69,7 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
         contentFrame.addView(mScannerView);*/
     }
 
-  /*  @Override
+ /*   @Override
     public void onResume() {
         super.onResume();
         mScannerView.setResultHandler(this);                //Register  ourselves as handler for scan result
@@ -161,7 +161,7 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
             Log.d(TAG, "findProduct: " + trademark.getName());
             for (DataSnapshot ds : dataSnapshot.child(getString(R.string.stock)).getChildren()) {
                 if (ds.getKey().equals(trademark.getName())) {
-                    Log.d(TAG, "findProduct: " +  ds.getKey());
+                    Log.d(TAG, "findProduct: " +  ds.getKey() );
                     try {
                         Map<String, Object> objectMap = (Map<String, Object>) ds.child(parts[1]).getValue();
                         product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
