@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +42,8 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
     private NavController navController;
     private ZXingScannerView mScannerView;
     private static final String TAG = "AddNewProduct";
+    ProgressBar progressBar;
+    TextView waitMessage;
     private String [] parts;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference mRef;
@@ -49,6 +53,10 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.scan_barode_in_fragment_layout,container,false);
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        progressBar = view.findViewById(R.id.progressBarWait);
+        waitMessage = view.findViewById(R.id.pleaseWait);
+        progressBar.setVisibility(View.GONE);
+        waitMessage.setVisibility(View.GONE);
         return view;
     }
 
@@ -65,10 +73,9 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
+        getInformation("1-60300-2-44");
 
-        getInformation("1-60300-2");
-
-      /*  mScannerView = new ZXingScannerView(getContext());
+        /*mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);*/
     }
 
@@ -83,8 +90,8 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
     public void onStop() {
         super.onStop();
         mScannerView.stopCamera();                          //Stop camera on stop
-    }
-*/
+    }*/
+
     @Override
     public void handleResult(Result rawResult) {
         //Do somthing with the result here
@@ -116,6 +123,8 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
      */
 
     private void getInformation(String barcode_value){
+        progressBar.setVisibility(View.VISIBLE);
+        waitMessage.setVisibility(View.VISIBLE);
         parts = barcode_value.split("-");
         mRef = FirebaseDatabase.getInstance().getReference();
         Log.d(TAG, "getInformation: " + parts[0] );
@@ -128,8 +137,10 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
                     if (settings.getProduct().getId() != 0 ) {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("product", settings);
-                        Log.d(TAG, "onDataChange: navigating to save to database");
+                        Log.d(TAG, "onDataChange: navigating to save to database" + settings.getProduct().getInner_count());
                         navController.navigate(R.id.action_scanBarcodeIn_to_saveToFirebaseIn,bundle);
+                        progressBar.setVisibility(View.GONE);
+                        waitMessage.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(getActivity(), getString(R.string.no_product_in_product_list), Toast.LENGTH_LONG).show();
                         showAddNewDialog(parts[1], parts[0]);
@@ -167,18 +178,19 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
                         Log.d(TAG, "initWidgets: inside" + single.getKey());
                         try {
                             Map<String, Object> objectMap = (Map<String, Object>) single.child(parts[1]).getValue();
+                            product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
                             product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
                             product.setName(objectMap.get(getString(R.string.field_name)).toString());
                             product.setColor(objectMap.get(getString(R.string.field_color)).toString());
                             product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
                             product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
-                            product.setDepth(Float.parseFloat(objectMap.get(getString(R.string.field_depth)).toString()));
+                            product.setDepth(Float.parseFloat(parts[3])/10);
                             product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                             product.setType(objectMap.get(getString(R.string.field_type)).toString());
                             product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                             product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
                             product.setTrademark(objectMap.get(getString(R.string.field_trademark)).toString());
-                            product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
+
                         }catch (NullPointerException e){
                             Log.e(TAG, "initWidgets: " + e.toString() );
                         }

@@ -17,11 +17,13 @@ public class Product implements Parcelable {
     private int inner_count;
     private String  unite;
     private String trademark;
+    private float total_quantity;
+    private int total_package_count;
 
     public Product() {
     }
 
-    public Product(int id, String name, String color, String category, String type, String imgUrl, float width, float height, float depth, float kg, int inner_count, String unite, String trademark) {
+    public Product(int id, String name, String color, String category, String type, String imgUrl, float width, float height, float depth, float kg, int inner_count, String unite, String trademark, float total_quantity, int total_package_count) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -35,6 +37,8 @@ public class Product implements Parcelable {
         this.inner_count = inner_count;
         this.unite = unite;
         this.trademark = trademark;
+        this.total_quantity = total_quantity;
+        this.total_package_count = total_package_count;
     }
 
     protected Product(Parcel in) {
@@ -63,6 +67,22 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
+
+    public float getTotal_quantity() {
+        return total_quantity;
+    }
+
+    public void setTotal_quantity(float total_quantity) {
+        this.total_quantity = total_quantity;
+    }
+
+    public int getTotal_package_count() {
+        return total_package_count;
+    }
+
+    public void setTotal_package_count(int total_package_count) {
+        this.total_package_count = total_package_count;
+    }
 
     public int getId() {
         return id;
@@ -188,5 +208,7 @@ public class Product implements Parcelable {
         dest.writeInt(inner_count);
         dest.writeString(unite);
         dest.writeString(trademark);
+        dest.writeFloat(total_quantity);
+        dest.writeInt(total_package_count);
     }
 }

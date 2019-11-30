@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +40,8 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
     private ZXingScannerView mScannerView;
     private static final String TAG = "AddNewProduct";
     private String [] parts;
+    ProgressBar progressBar;
+    TextView waitMessage;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference mRef;
 
@@ -46,6 +50,10 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.scan_barode_out_fragment_layout,container,false);
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        progressBar = view.findViewById(R.id.progressBarWait);
+        waitMessage = view.findViewById(R.id.pleaseWait);
+        progressBar.setVisibility(View.GONE);
+        waitMessage.setVisibility(View.GONE);
         return view;
     }
 
@@ -63,13 +71,12 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
 
-        getInformation("1-60300-2");
-
-        /*mScannerView = new ZXingScannerView(getContext());
+        getInformation("1-60300-2-44");
+       /* mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);*/
     }
 
- /*   @Override
+   /* @Override
     public void onResume() {
         super.onResume();
         mScannerView.setResultHandler(this);                //Register  ourselves as handler for scan result
@@ -81,7 +88,6 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
         super.onStop();
         mScannerView.stopCamera();                          //Stop camera on stop
     }*/
-
     @Override
     public void handleResult(Result rawResult) {
         //Do somthing with the result here
@@ -113,6 +119,8 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
      */
 
     private void getInformation(String barcode_value){
+        progressBar.setVisibility(View.VISIBLE);
+        waitMessage.setVisibility(View.VISIBLE);
         parts = barcode_value.split("-");
         mRef = FirebaseDatabase.getInstance().getReference();
         Log.d(TAG, "getInformation: " + parts[0] );
@@ -127,6 +135,8 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
                         bundle.putParcelable("product", settings);
                         Log.d(TAG, "onDataChange: navigating to save to database");
                         navController.navigate(R.id.action_scanBarcodeOut_to_saveToFirebaseOut,bundle);
+                        progressBar.setVisibility(View.GONE);
+                        waitMessage.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(getActivity(),getContext().getString(R.string.product_does_not_exist),Toast.LENGTH_LONG).show();
                         navController.navigate(R.id.action_scanBarcodeOut_to_mainFragment);
@@ -158,26 +168,24 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
         Product product = new Product();
         Trademark trademark = findTrademark(dataSnapshot);
         if(!trademark.getName().equals("")){
-            Log.d(TAG, "findProduct: " + trademark.getName());
-            for (DataSnapshot ds : dataSnapshot.child(getString(R.string.stock)).getChildren()) {
-                if (ds.getKey().equals(trademark.getName())) {
-                    Log.d(TAG, "findProduct: " +  ds.getKey() );
+            for (DataSnapshot ds : dataSnapshot.child(getString(R.string.stock)).child(parts[0]).child(trademark.getName()).getChildren()) {
+                if (ds.getKey().equals(parts[1])) {
                     try {
-                        Map<String, Object> objectMap = (Map<String, Object>) ds.child(parts[1]).getValue();
+                        Map<String, Object> objectMap = (Map<String, Object>) ds.child(parts[3]).getValue();
+                        Log.d(TAG, "initWidgets: " + parts[1] + " ---- " + objectMap.get("id"));
+                        product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
                         product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
                         product.setName(objectMap.get(getString(R.string.field_name)).toString());
                         product.setColor(objectMap.get(getString(R.string.field_color)).toString());
                         product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
                         product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
-                        product.setDepth(Float.parseFloat(objectMap.get(getString(R.string.field_depth)).toString()));
+                        product.setDepth(Float.parseFloat(parts[3])/10);
                         product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                         product.setType(objectMap.get(getString(R.string.field_type)).toString());
                         product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                         product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
-                        product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
-                        Log.d(TAG, "initWidgets: " + parts[1]);
                     } catch (NullPointerException e) {
-                        Log.e(TAG, "initWidgets: " + e.toString());
+                        Log.e(TAG, "initWidgets: " + e.toString() + " -- " + ds.getValue());
                     }
                 }
             }

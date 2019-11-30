@@ -96,83 +96,101 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
         name.setText(settings.getProduct().getName());
         color.setText(settings.getProduct().getColor());
         trademark.setText(settings.getTrademark().getName());
+        packgeIn.setText(String.valueOf(settings.getProduct().getDepth()));
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.save_product){
-            if(!packageCount.getText().toString().equals("") && !packgeIn.getText().toString().equals("")){
+            if(!packageCount.getText().toString().equals("")){
                 final int count = Integer.parseInt(packageCount.getText().toString());
-                final float inner_count = Float.parseFloat((packgeIn.getText().toString()));
+                final float inner_count = settings.getProduct().getInner_count()*settings.getProduct().getDepth();
+                Log.d(TAG, "onClick: inn" + inner_count);
                 Query query2 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
                         .child(getString(R.string.stock))
+                        .child(settings.getProduct().getType())
                         .child(settings.getTrademark().getName())
                         .child(String.valueOf(settings.getProduct().getId()))
+                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                         .child(getString(R.string.field_total_quantity));
-                query2.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getKey().equals(getString(R.string.field_total_quantity))) {
-                            Log.d(TAG, "onDataChange: " + dataSnapshot.getValue() + settings.getProduct().getId());
-                            total_quantity =  dataSnapshot.getValue(Integer.class);
-                            if(count*inner_count <= total_quantity){
-                                total_quantity = total_quantity - inner_count*count;
-                                Query query1 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
-                                        .child(getString(R.string.stock))
-                                        .child(settings.getTrademark().getName())
-                                        .child(String.valueOf(settings.getProduct().getId()))
-                                        .child(getString(R.string.field_total_count));
-                                query1.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if(dataSnapshot.getKey() == getString(R.string.field_total_count)) {
-                                            total_package =  dataSnapshot.getValue(Integer.class) - count;
-                                            mRef.child(getString(R.string.company_name))
-                                                    .child(getString(R.string.stock))
-                                                    .child(settings.getTrademark().getName())
-                                                    .child(String.valueOf(settings.getProduct().getId()))
-                                                    .child(getString(R.string.field_total_count))
-                                                    .setValue(total_package);
+                try{
+                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.getKey().equals(getString(R.string.field_total_quantity))) {
+                                Log.d(TAG, "onDataChange: " + dataSnapshot.getValue() + settings.getProduct().getId());
+                                total_quantity =  dataSnapshot.getValue(Integer.class);
+                                if(count*inner_count <= total_quantity){
+                                    total_quantity = total_quantity - inner_count*count;
+                                    Query query1 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
+                                            .child(getString(R.string.stock))
+                                            .child(settings.getProduct().getType())
+                                            .child(settings.getTrademark().getName())
+                                            .child(String.valueOf(settings.getProduct().getId()))
+                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                            .child(getString(R.string.field_total_count));
+                                    query1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if(dataSnapshot.getKey() == getString(R.string.field_total_count)) {
+                                                total_package =  dataSnapshot.getValue(Integer.class) - count;
+                                                mRef.child(getString(R.string.company_name))
+                                                        .child(getString(R.string.stock))
+                                                        .child(settings.getProduct().getType())
+                                                        .child(settings.getTrademark().getName())
+                                                        .child(String.valueOf(settings.getProduct().getId()))
+                                                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                                        .child(getString(R.string.field_total_count))
+                                                        .setValue(total_package);
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    }
-                                });
-                                mRef.child(getString(R.string.company_name))
-                                        .child(getString(R.string.stock))
-                                        .child(settings.getTrademark().getName())
-                                        .child(String.valueOf(settings.getProduct().getId()))
-                                        .child(getString(R.string.field_total_quantity))
-                                        .setValue(total_quantity);
+                                        }
+                                    });
+                                    mRef.child(getString(R.string.company_name))
+                                            .child(getString(R.string.stock))
+                                            .child(settings.getProduct().getType())
+                                            .child(settings.getTrademark().getName())
+                                            .child(String.valueOf(settings.getProduct().getId()))
+                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                            .child(getString(R.string.field_total_quantity))
+                                            .setValue(total_quantity);
 
-                                SoldProduct sold = new SoldProduct();
-                                sold.setDate(new Date());
-                                sold.setUser_name("ahmed");
-                                sold.setPackage_count(count);
-                                sold.setTotal_quantity(count*inner_count);
-                                sold.setTrademaek(settings.getTrademark().getName());
-                                mRef = FirebaseDatabase.getInstance().getReference();
-                                mRef.child(getString(R.string.company_name))
-                                        .child(getString(R.string.sold_product))
-                                        .child(String.valueOf(settings.getProduct().getId()))
-                                        .push()
-                                        .setValue(sold);
-                            }
-                            else {
-                                Toast.makeText(getContext(),getContext().getString(R.string.requsted_quantity_not_exist),Toast.LENGTH_LONG).show();
+                                    SoldProduct sold = new SoldProduct();
+                                    sold.setDate(new Date());
+                                    sold.setUser_name("ahmed");
+                                    sold.setPackage_count(count);
+                                    sold.setTotal_quantity(count*inner_count);
+                                    sold.setTrademaek(settings.getTrademark().getName());
+                                    mRef = FirebaseDatabase.getInstance().getReference();
+                                    mRef.child(getString(R.string.company_name))
+                                            .child(getString(R.string.sold_product))
+                                            .child(settings.getProduct().getType())
+                                            .child(settings.getTrademark().getName())
+                                            .child(String.valueOf(settings.getProduct().getId()))
+                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                            .push()
+                                            .setValue(sold);
+                                }
+                                else {
+                                    Toast.makeText(getContext(),getContext().getString(R.string.requsted_quantity_not_exist),Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-                navController.navigate(R.id.action_saveToFirebaseOut_to_goToScanDialog);
+                        }
+                    });
+                    navController.navigate(R.id.action_saveToFirebaseOut_to_goToScanDialog);
+                }catch (NullPointerException e){
+                    Log.e(TAG, "onClick: " + e.toString() );
+                }
+
             }
             else {
                 if(packageCount.getText() == null){

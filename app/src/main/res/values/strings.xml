@@ -54,7 +54,7 @@
     <string name="field_imgUrl">imgUrl</string>
     <string name="field_inner_count">inner_count</string>
     <string name="field_unite">unite</string>
-    <string name="inside_package_count">Enter Package Total Size/Count</string>
+    <string name="inside_package_count">Package Total Size/Count</string>
     <string name="field_total_quantity">total_quantity</string>
     <string name="sold_product">SoldProducts</string>
     <string name="scan_new_barcode_in">Scan Product For Store</string>
@@ -67,4 +67,5 @@
     <string name="trademark_id">Trademark ID</string>
     <string name="trademark_name">Trademark Name</string>
     <string name="field_types">Types</string>
+    <string name="please_wait_message">Please Wait</string>
 </resources>

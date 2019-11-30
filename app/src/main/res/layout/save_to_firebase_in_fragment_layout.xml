@@ -60,12 +60,12 @@
                 android:background="@drawable/ic_rounded_grey_inside"
                 android:textColor="#000"
                 android:layout_marginBottom="15dp"/>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/inner_count"
-                android:hint="@string/inside_package_count"
+                android:text="@string/inside_package_count"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:textAlignment="center"

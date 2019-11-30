@@ -95,15 +95,16 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
         name.setText(settings.getProduct().getName());
         color.setText(settings.getProduct().getColor());
         trademark.setText(settings.getTrademark().getName());
+        packgeIn.setText(String.valueOf(settings.getProduct().getDepth()));
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.save_product){
-            if(!packageCount.getText().toString().equals("") && !packgeIn.getText().toString().equals("")){
+            if(!packageCount.getText().toString().equals("")){
                 final int count = Integer.parseInt(packageCount.getText().toString());
-                final float inner_count = Float.parseFloat((packgeIn.getText().toString()));
-
+                final float inner_count = settings.getProduct().getInner_count()*settings.getProduct().getDepth();
+                Log.d(TAG, "onClick: inn" + inner_count);
                 final IncomeProduct income = new IncomeProduct();
                 income.setDate(new Date());
                 income.setUser_name("ahmed");
@@ -116,38 +117,43 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
                 //saving product in incoming table
                 mRef.child(getString(R.string.company_name))
                         .child(getString(R.string.incoming_product))
-                        .child(String.valueOf(settings.getProduct().getId()))
-                        .push()
-                        .setValue(income);
-                mRef.child(getString(R.string.company_name))
-                        .child(getString(R.string.stock))
+                        .child(settings.getProduct().getType())
                         .child(settings.getTrademark().getName())
                         .child(String.valueOf(settings.getProduct().getId()))
-                        .setValue(settings.getProduct());
+                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                        .push()
+                        .setValue(income);
                 // updating total count
                 // TODO total count 0
                 Query query1 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
                         .child(getString(R.string.stock))
+                        .child(settings.getProduct().getType())
                         .child(settings.getTrademark().getName())
                         .child(String.valueOf(settings.getProduct().getId()))
+                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                         .child(getString(R.string.field_total_count));
                 query1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Log.d(TAG, "onClick: total before " + dataSnapshot.getValue(Integer.class));
                         if(dataSnapshot.getValue() != null) {
                             total_package = count + dataSnapshot.getValue(Integer.class);
                             mRef.child(getString(R.string.company_name))
                                     .child(getString(R.string.stock))
+                                    .child(settings.getProduct().getType())
                                     .child(settings.getTrademark().getName())
                                     .child(String.valueOf(settings.getProduct().getId()))
+                                    .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                                     .child(getString(R.string.field_total_count))
                                     .setValue(total_package);
                         }
                         else{
                             mRef.child(getString(R.string.company_name))
                                     .child(getString(R.string.stock))
+                                    .child(settings.getProduct().getType())
                                     .child(settings.getTrademark().getName())
                                     .child(String.valueOf(settings.getProduct().getId()))
+                                    .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                                     .child(getString(R.string.field_total_count))
                                     .setValue(count);
                         }
@@ -160,8 +166,10 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
                 });
                 Query query2 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
                         .child(getString(R.string.stock))
+                        .child(settings.getProduct().getType())
                         .child(settings.getTrademark().getName())
                         .child(String.valueOf(settings.getProduct().getId()))
+                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                         .child(getString(R.string.field_total_quantity));
                 query2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -170,16 +178,20 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
                             total_quantity = inner_count*count + dataSnapshot.getValue(Integer.class);
                             mRef.child(getString(R.string.company_name))
                                     .child(getString(R.string.stock))
+                                    .child(settings.getProduct().getType())
                                     .child(settings.getTrademark().getName())
                                     .child(String.valueOf(settings.getProduct().getId()))
+                                    .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                                     .child(getString(R.string.field_total_quantity))
                                     .setValue(total_quantity);
                         }
                         else{
                             mRef.child(getString(R.string.company_name))
                                     .child(getString(R.string.stock))
+                                    .child(settings.getProduct().getType())
                                     .child(settings.getTrademark().getName())
                                     .child(String.valueOf(settings.getProduct().getId()))
+                                    .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
                                     .child(getString(R.string.field_total_quantity))
                                     .setValue(inner_count*count);
                         }
