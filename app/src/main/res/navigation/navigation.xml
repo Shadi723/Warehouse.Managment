@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addNewTrademark"
             app:destination="@id/addNewTrademark" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchForProduct"
+            app:destination="@id/searchForProduct" />
     </fragment>
     <fragment
         android:id="@+id/scanBarcodeIn"
@@ -104,4 +107,18 @@
             android:id="@+id/action_addNewTrademark_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchForProduct"
+        android:name="com.example.warehousemanagment.Shadi.EditProduct.SearchForProduct"
+        android:label="search_for_product_fragment_layout"
+        tools:layout="@layout/search_for_product_fragment_layout" >
+        <action
+            android:id="@+id/action_searchForProduct_to_editProduct"
+            app:destination="@id/editProduct" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProduct"
+        android:name="com.example.warehousemanagment.Shadi.EditProduct.EditProduct"
+        android:label="edit_product_fragment_layout"
+        tools:layout="@layout/edit_product_fragment_layout" />
 </navigation>

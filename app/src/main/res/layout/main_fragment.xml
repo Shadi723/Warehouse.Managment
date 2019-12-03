@@ -46,4 +46,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ScanBarcodeOut" />
 
+    <Button
+        android:id="@+id/editProduct"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/edit_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addNewTrademark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

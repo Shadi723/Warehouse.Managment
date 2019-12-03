@@ -20,7 +20,7 @@ import androidx.navigation.Navigation;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
     NavController navController;
-    Button addToStore, sellProduct, addNewProduct,addNewTrademark;
+    Button addToStore, sellProduct, addNewProduct,addNewTrademark, editProduct;
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClass;
 
@@ -40,11 +40,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         sellProduct = view.findViewById(R.id.ScanBarcodeOut);
         addNewProduct = view.findViewById(R.id.addNewProduct);
         addNewTrademark = view.findViewById(R.id.addNewTrademark);
+        editProduct= view.findViewById(R.id.editProduct);
         checkPermession();
         addToStore.setOnClickListener(this);
         sellProduct.setOnClickListener(this);
         addNewProduct.setOnClickListener(this);
         addNewTrademark.setOnClickListener(this);
+        editProduct.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -59,6 +61,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
         if(v == addNewTrademark){
             navController.navigate(R.id.action_mainFragment_to_addNewTrademark);
+        }
+        if(v == editProduct){
+            navController.navigate(R.id.action_mainFragment_to_searchForProduct);
         }
     }
 

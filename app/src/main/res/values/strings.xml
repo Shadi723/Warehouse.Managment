@@ -68,4 +68,13 @@
     <string name="trademark_name">Trademark Name</string>
     <string name="field_types">Types</string>
     <string name="please_wait_message">Please Wait</string>
+    <string name="please_select_type">Please Select Type</string>
+    <string name="please_select_trademark">Please Select Trademark</string>
+    <string name="please_enter_id">Please Enter Product Id</string>
+    <string name="successfully_founded">Product Founded!</string>
+    <string name="failed_to_find">Failed To Find Product</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="save_update">Save Update</string>
+    <string name="search_for_product">Search Product</string>
+    <string name="save_update_product">Update Product</string>
 </resources>
