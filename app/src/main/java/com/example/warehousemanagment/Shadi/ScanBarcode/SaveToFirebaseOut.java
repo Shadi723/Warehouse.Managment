@@ -121,7 +121,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                         .child(settings.getProduct().getType())
                         .child(settings.getTrademark().getName())
                         .child(String.valueOf(settings.getProduct().getId()))
-                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                        .child(String.valueOf((int)(settings.getProduct().getDepth()*settings.getProduct().getInner_count())))
                         .child(getString(R.string.field_total_quantity));
                 try{
                     query2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -137,7 +137,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                                             .child(settings.getProduct().getType())
                                             .child(settings.getTrademark().getName())
                                             .child(String.valueOf(settings.getProduct().getId()))
-                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*settings.getProduct().getInner_count())))
                                             .child(getString(R.string.field_total_count));
                                     query1.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -149,7 +149,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                                                         .child(settings.getProduct().getType())
                                                         .child(settings.getTrademark().getName())
                                                         .child(String.valueOf(settings.getProduct().getId()))
-                                                        .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                                        .child(String.valueOf((int)(settings.getProduct().getDepth()*settings.getProduct().getInner_count())))
                                                         .child(getString(R.string.field_total_count))
                                                         .setValue(total_package);
                                             }
@@ -165,7 +165,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                                             .child(settings.getProduct().getType())
                                             .child(settings.getTrademark().getName())
                                             .child(String.valueOf(settings.getProduct().getId()))
-                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*settings.getProduct().getInner_count())))
                                             .child(getString(R.string.field_total_quantity))
                                             .setValue(total_quantity);
 
@@ -181,7 +181,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                                             .child(settings.getProduct().getType())
                                             .child(settings.getTrademark().getName())
                                             .child(String.valueOf(settings.getProduct().getId()))
-                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*10)))
+                                            .child(String.valueOf((int)(settings.getProduct().getDepth()*settings.getProduct().getInner_count())))
                                             .push()
                                             .setValue(sold);
                                 }

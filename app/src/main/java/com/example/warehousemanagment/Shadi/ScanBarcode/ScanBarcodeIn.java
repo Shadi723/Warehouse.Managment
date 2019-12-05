@@ -82,7 +82,7 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
-        getInformation("1-60300-2-44");
+        getInformation("1-60300-2-36");
 
         /*mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);*/
@@ -193,7 +193,7 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
                             product.setColor(objectMap.get(getString(R.string.field_color)).toString());
                             product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
                             product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
-                            product.setDepth(Float.parseFloat(parts[3])/10);
+                            product.setDepth(Float.parseFloat(parts[3])/product.getInner_count());
                             product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                             product.setType(objectMap.get(getString(R.string.field_type)).toString());
                             product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
