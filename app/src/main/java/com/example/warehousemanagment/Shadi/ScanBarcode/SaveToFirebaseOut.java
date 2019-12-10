@@ -1,6 +1,7 @@
 package com.example.warehousemanagment.Shadi.ScanBarcode;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,19 @@ import com.example.warehousemanagment.R;
 import com.example.warehousemanagment.Shadi.Models.IncomeProduct;
 import com.example.warehousemanagment.Shadi.Models.ProductSettings;
 import com.example.warehousemanagment.Shadi.Models.SoldProduct;
+import com.example.warehousemanagment.Shadi.Utils.UniversalImageLoader;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firestore.admin.v1beta1.Progress;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.Date;
 
@@ -42,6 +51,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
     EditText packageCount;
     Button save;
     ImageView imageView;
+    ProgressBar mProgressbar;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference mRef;
     ProductSettings settings;
@@ -69,6 +79,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
         save = view.findViewById(R.id.save_product);
         imageView = view.findViewById(R.id.product_img);
         trademark = view.findViewById(R.id.product_trade);
+        mProgressbar = view.findViewById(R.id.loading);
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRef = firebaseDatabase.getReference();
@@ -91,6 +102,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
 
         // The callback can be enabled or disabled here or in handleOnBackPressed()
        // getInformation();
+        initImageLoader();
     }
 
     @Override
@@ -106,7 +118,20 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
         name.setText(settings.getProduct().getName());
         color.setText(settings.getProduct().getColor());
         trademark.setText(settings.getTrademark().getName());
-        packgeIn.setText(String.valueOf(settings.getProduct().getDepth()));
+        packgeIn.setText(String.format("%.2f",settings.getProduct().getDepth()));
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        storageRef.child(settings.getProduct().getImgurl().replace("gs://istockmanagment-2a5f5.appspot.com/","")).getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        UniversalImageLoader.setImage(uri.toString(),imageView,mProgressbar,"");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(),getString(R.string.error_loading_image) +" " + e.toString(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -211,5 +236,9 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                 }
             }
         }
+    }
+    private void initImageLoader(){
+        UniversalImageLoader universalImageLoader = new UniversalImageLoader(getActivity());
+        ImageLoader.getInstance().init(universalImageLoader.getConfig());
     }
 }

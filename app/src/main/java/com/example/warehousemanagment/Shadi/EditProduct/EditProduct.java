@@ -106,7 +106,7 @@ public class EditProduct extends Fragment implements View.OnClickListener {
                                     product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                                     product.setType(objectMap.get(getString(R.string.field_type)).toString());
                                     product.setTrademark(objectMap.get(getString(R.string.field_trademark)).toString());
-                                    product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
+                                    product.setImgurl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                                     product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
 
                                 }catch (NullPointerException e){

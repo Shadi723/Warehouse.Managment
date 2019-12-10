@@ -164,7 +164,7 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
                 if(img_loaded){
                     //save product
                     product.setTrademark(trade.getSelectedItem().toString());
-                    product.setImgUrl("http://site.com/image.png");
+                    product.setImgurl("http://site.com/image.png");
                     addProduct(product);
                     Toast.makeText(getContext(),getString(R.string.successfully_added),Toast.LENGTH_LONG).show();
                     navController.navigate(R.id.action_addNewProduct_to_goToScanDialog);

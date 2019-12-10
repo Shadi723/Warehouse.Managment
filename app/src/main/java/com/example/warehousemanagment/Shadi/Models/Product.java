@@ -9,7 +9,7 @@ public class Product implements Parcelable {
     private String color;
     private String category;
     private String type;
-    private String imgUrl;
+    private String imgurl;
     private float width;
     private float height;
     private float depth;
@@ -23,13 +23,13 @@ public class Product implements Parcelable {
     public Product() {
     }
 
-    public Product(int id, String name, String color, String category, String type, String imgUrl, float width, float height, float depth, float kg, int inner_count, String unite, String trademark, float total_quantity, int total_package_count) {
+    public Product(int id, String name, String color, String category, String type, String imgurl, float width, float height, float depth, float kg, int inner_count, String unite, String trademark, float total_quantity, int total_package_count) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.category = category;
         this.type = type;
-        this.imgUrl = imgUrl;
+        this.imgurl = imgurl;
         this.width = width;
         this.height = height;
         this.depth = depth;
@@ -47,14 +47,17 @@ public class Product implements Parcelable {
         color = in.readString();
         category = in.readString();
         type = in.readString();
-        imgUrl = in.readString();
+        imgurl = in.readString();
         width = in.readFloat();
         height = in.readFloat();
         depth = in.readFloat();
         kg = in.readFloat();
         inner_count = in.readInt();
+        unite = in.readString();
+        trademark = in.readString();
+        total_quantity = in.readFloat();
+        total_package_count = in.readInt();
     }
-
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
@@ -67,22 +70,6 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
-
-    public float getTotal_quantity() {
-        return total_quantity;
-    }
-
-    public void setTotal_quantity(float total_quantity) {
-        this.total_quantity = total_quantity;
-    }
-
-    public int getTotal_package_count() {
-        return total_package_count;
-    }
-
-    public void setTotal_package_count(int total_package_count) {
-        this.total_package_count = total_package_count;
-    }
 
     public int getId() {
         return id;
@@ -124,12 +111,12 @@ public class Product implements Parcelable {
         this.type = type;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImgurl() {
+        return imgurl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
     }
 
     public float getWidth() {
@@ -188,6 +175,22 @@ public class Product implements Parcelable {
         this.trademark = trademark;
     }
 
+    public float getTotal_quantity() {
+        return total_quantity;
+    }
+
+    public void setTotal_quantity(float total_quantity) {
+        this.total_quantity = total_quantity;
+    }
+
+    public int getTotal_package_count() {
+        return total_package_count;
+    }
+
+    public void setTotal_package_count(int total_package_count) {
+        this.total_package_count = total_package_count;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -200,7 +203,7 @@ public class Product implements Parcelable {
         dest.writeString(color);
         dest.writeString(category);
         dest.writeString(type);
-        dest.writeString(imgUrl);
+        dest.writeString(imgurl);
         dest.writeFloat(width);
         dest.writeFloat(height);
         dest.writeFloat(depth);

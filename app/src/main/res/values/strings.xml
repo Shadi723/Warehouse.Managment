@@ -51,7 +51,7 @@
     <string name="field_depth">depth</string>
     <string name="field_kg">kg</string>
     <string name="field_type">type</string>
-    <string name="field_imgUrl">imgUrl</string>
+    <string name="field_imgUrl">imgurl</string>
     <string name="field_inner_count">inner_count</string>
     <string name="field_unite">unite</string>
     <string name="inside_package_count">Package Total Size/Count</string>
@@ -77,4 +77,5 @@
     <string name="save_update">Save Update</string>
     <string name="search_for_product">Search Product</string>
     <string name="save_update_product">Update Product</string>
+    <string name="error_loading_image">Error Occured While Loading Image</string>
 </resources>

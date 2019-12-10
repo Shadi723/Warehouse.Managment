@@ -183,17 +183,17 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
                 if (ds.getKey().equals(parts[1])) {
                     try {
                         Map<String, Object> objectMap = (Map<String, Object>) ds.child(parts[3]).getValue();
-                        Log.d(TAG, "initWidgets: " + parts[1] + " ---- " + objectMap.get("id"));
+                        Log.d(TAG, "initWidgets: saveout " + objectMap.get(getString(R.string.field_imgUrl)).toString());
                         product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
                         product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
                         product.setName(objectMap.get(getString(R.string.field_name)).toString());
                         product.setColor(objectMap.get(getString(R.string.field_color)).toString());
+                        product.setImgurl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                         product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
                         product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
                         product.setDepth(Float.parseFloat(parts[3])/product.getInner_count());
                         product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                         product.setType(objectMap.get(getString(R.string.field_type)).toString());
-                        product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                         product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
                     } catch (NullPointerException e) {
                         Log.e(TAG, "initWidgets: " + e.toString() + " -- " + ds.getValue());

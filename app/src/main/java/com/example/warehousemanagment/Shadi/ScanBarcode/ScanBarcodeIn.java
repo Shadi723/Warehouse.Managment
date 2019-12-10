@@ -82,7 +82,7 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
-        getInformation("1-60300-2-36");
+        getInformation("1-60300-1-34.8");
 
         /*mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);*/
@@ -184,7 +184,6 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
             if (ds.getKey().equals(getString(R.string.field_products))) {
                 for(DataSnapshot single:ds.getChildren()){
                     if(single.getKey().equals(trademark.getName())){
-                        Log.d(TAG, "initWidgets: inside" + single.getKey());
                         try {
                             Map<String, Object> objectMap = (Map<String, Object>) single.child(parts[1]).getValue();
                             product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));
@@ -196,10 +195,10 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
                             product.setDepth(Float.parseFloat(parts[3])/product.getInner_count());
                             product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                             product.setType(objectMap.get(getString(R.string.field_type)).toString());
-                            product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
+                            Log.d(TAG, "initWidgets: image" + objectMap.get(getString(R.string.field_imgUrl)).toString());
+                            product.setImgurl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                             product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
                             product.setTrademark(objectMap.get(getString(R.string.field_trademark)).toString());
-
                         }catch (NullPointerException e){
                             Log.e(TAG, "initWidgets: " + e.toString() );
                         }
