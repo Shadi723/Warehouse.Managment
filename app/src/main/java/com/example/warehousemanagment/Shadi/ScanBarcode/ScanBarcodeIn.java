@@ -1,7 +1,11 @@
 package com.example.warehousemanagment.Shadi.ScanBarcode;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -35,6 +40,8 @@ import com.google.zxing.Result;
 import java.util.Map;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHandler
 {
@@ -82,13 +89,13 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
-        getInformation("1-60300-1-34.8");
+        //getInformation("1-60300-1-34.8");
 
-        /*mScannerView = new ZXingScannerView(getContext());
-        contentFrame.addView(mScannerView);*/
+        mScannerView = new ZXingScannerView(getContext());
+        contentFrame.addView(mScannerView);
     }
 
-  /*  @Override
+    @Override
     public void onResume() {
         super.onResume();
         mScannerView.setResultHandler(this);                //Register  ourselves as handler for scan result
@@ -99,16 +106,26 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
     public void onStop() {
         super.onStop();
         mScannerView.stopCamera();                          //Stop camera on stop
-    }*/
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void handleResult(Result rawResult) {
         //Do somthing with the result here
-
+        MediaPlayer mp = MediaPlayer.create(getContext(),R.raw.beep);
         Log.d(TAG, "handleResult: " + rawResult.getText());       //Print scan result
         Log.d(TAG, "handleResult: " + rawResult.getBarcodeFormat().toString()); //Prints the scan format (qrcode, pdf417 etc.)
 
         if(rawResult.getText() != null){
+            Vibrator vibrator = (Vibrator) getContext().getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+            if (Build.VERSION.SDK_INT >= 26) {
+                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+            }
+            else{
+                vibrator.vibrate(200);
+            }
+            mp.start();
             getInformation(rawResult.getText());
         }
 
