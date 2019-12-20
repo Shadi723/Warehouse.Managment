@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
@@ -42,18 +43,21 @@ public class SearchForProduct extends Fragment implements  AdapterView.OnItemSel
 
     private static final String TAG = "SearchForProduct";
     ////////////
-    Spinner type, trademark;
-    EditText product_id;
-    Button search;
-    ProgressBar progressBar;
-    TextView waitMessage;
+    private Spinner type, trademark;
+    private EditText product_id;
+    private Button search;
+    private ProgressBar progressBar;
+    private TextView waitMessage;
 
     ////////////
-    String selected_type, selected_trademark, selected_id;
+    private String selected_type, selected_trademark, selected_id;
     ////////////
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
-    NavController navController;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+    private NavController navController;
+
+    private FragmentActivity fragmentActivity;
+
     public SearchForProduct() {
         // Required empty public constructor
     }
@@ -68,6 +72,9 @@ public class SearchForProduct extends Fragment implements  AdapterView.OnItemSel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        fragmentActivity = getActivity();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.search_for_product_fragment_layout,container,false);
         type = view.findViewById(R.id.select_type);
@@ -80,7 +87,7 @@ public class SearchForProduct extends Fragment implements  AdapterView.OnItemSel
         trademark.setVisibility(View.GONE);
         product_id.setVisibility(View.GONE);
         search.setVisibility(View.GONE);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(fragmentActivity,R.id.nav_host_fragment);
         type.setOnItemSelectedListener(this);
         initTypeWidgets();
         return view;
@@ -103,7 +110,7 @@ public class SearchForProduct extends Fragment implements  AdapterView.OnItemSel
                         }
                     }
                 }
-                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(),R.layout.spinner_simple_layout,types);
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(fragmentActivity,R.layout.spinner_simple_layout,types);
                 progressBar.setVisibility(View.GONE);
                 waitMessage.setVisibility(View.GONE);
                 type.setVisibility(View.VISIBLE);
@@ -170,7 +177,7 @@ public class SearchForProduct extends Fragment implements  AdapterView.OnItemSel
                         }
                     }
                 }
-                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), R.layout.spinner_simple_layout, trademarks);
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(fragmentActivity, R.layout.spinner_simple_layout, trademarks);
                 trademark.setAdapter(adapter1);
                 trademark.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override

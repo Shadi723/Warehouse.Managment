@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -47,16 +48,20 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
     private ZXingScannerView mScannerView;
     private static final String TAG = "AddNewProduct";
     private String [] parts;
-    ProgressBar progressBar;
-    TextView waitMessage;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
+    private ProgressBar progressBar;
+    private TextView waitMessage;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+
+    private FragmentActivity fragmentActivity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.scan_barode_out_fragment_layout,container,false);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        fragmentActivity = getActivity();
+
+        navController = Navigation.findNavController(fragmentActivity, R.id.nav_host_fragment);
         progressBar = view.findViewById(R.id.progressBarWait);
         waitMessage = view.findViewById(R.id.pleaseWait);
         progressBar.setVisibility(View.GONE);
@@ -67,6 +72,7 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRef = firebaseDatabase.getReference();
         // This callback will only be called when MyFragment is at least Started.
@@ -87,7 +93,6 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentFrame = view.findViewById(R.id.content_frame);
         //Demo
-
         //getInformation("1-60300-2-36");
         mScannerView = new ZXingScannerView(getContext());
         contentFrame.addView(mScannerView);

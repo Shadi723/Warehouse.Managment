@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -43,19 +44,21 @@ import java.util.ArrayList;
 public class AddNewTrademark extends Fragment implements View.OnClickListener {
 
 
-    EditText  trademark_name;
-    TextView trademark_id;
-    Button save;
-    ImageView img_load;
-    Spinner types_list;
-    NavController navController;
-    long count;
+    private EditText  trademark_name;
+    private TextView trademark_id;
+    private Button save;
+    private ImageView img_load;
+    private Spinner types_list;
+    private NavController navController;
+    private long count;
 
     private static final String TAG = "AddNewTrademark";
     //firebase
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+
+    private FragmentActivity fragmentActivity;
 
     public AddNewTrademark() {
         // Required empty public constructor
@@ -65,13 +68,16 @@ public class AddNewTrademark extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        fragmentActivity = getActivity();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.add_new_trademark_fragment_layout,container,false);
         trademark_id = view.findViewById(R.id.trademark_id);
         trademark_name = view.findViewById(R.id.trademark_name);
         types_list = view.findViewById(R.id.types_list);
         save = view.findViewById(R.id.save_product_new);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(fragmentActivity,R.id.nav_host_fragment);
         save.setOnClickListener(this);
         return view;
     }
@@ -135,7 +141,7 @@ public class AddNewTrademark extends Fragment implements View.OnClickListener {
                         allTypes.add(types);
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),R.layout.spinner_simple_layout,allTypes);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(fragmentActivity,R.layout.spinner_simple_layout,allTypes);
                 types_list.setAdapter(adapter);
                 types_list.setSelection(0);
             }

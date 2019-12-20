@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -42,18 +43,20 @@ import java.util.ArrayList;
 public class AddNewProduct extends Fragment implements View.OnClickListener {
 
 
-    EditText product_id, product_name, product_color, product_depth, product_height, product_weight, product_width, package_inside;
-    Button save;
-    ImageView img_load;
-    Spinner trade;
-    NavController navController;
-    boolean img_loaded = false;
+    private EditText product_id, product_name, product_color, product_depth, product_height, product_weight, product_width, package_inside;
+    private Button save;
+    private ImageView img_load;
+    private Spinner trade;
+    private NavController navController;
+    private boolean img_loaded = false;
 
     private static final String TAG = "AddNewProduct";
     //firebase
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+
+    private FragmentActivity fragmentActivity;
 
     public AddNewProduct() {
         // Required empty public constructor
@@ -64,6 +67,8 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        fragmentActivity = getActivity();
+
         View view = inflater.inflate(R.layout.add_new_product_fragment_layout,container,false);
         product_id = view.findViewById(R.id.product_id);
         product_name = view.findViewById(R.id.product_name);
@@ -76,7 +81,7 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
         trade = view.findViewById(R.id.product_trade);
         save = view.findViewById(R.id.save_product_new);
         img_load = view.findViewById(R.id.img_load);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(fragmentActivity, R.id.nav_host_fragment);
         save.setOnClickListener(this);
         img_load.setOnClickListener(this);
         return view;
@@ -131,7 +136,7 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
                     }
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),R.layout.spinner_simple_layout,allTrades);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(fragmentActivity,R.layout.spinner_simple_layout,allTrades);
                 trade.setAdapter(adapter);
                 trade.setSelection(0);
             }

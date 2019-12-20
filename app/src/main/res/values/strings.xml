@@ -32,7 +32,7 @@
     <string name="cancel">Cancel</string>
     <string name="add_new_product_dialog">This product does not exist do you want to add this product to the list?</string>
     <string name="scan_new_barcode">Scan Barcode</string>
-    <string name="successfully_added">Product Successfuly Saved</string>
+    <string name="successfully_added">Product Successfully Saved</string>
     <string name="navigate_to_scan">If you want to navigate back to scanning products press Yes</string>
     <string name="fill_product_id">Please Insert Product ID</string>
     <string name="fill_product_color">Please Insert Product Color</string>
@@ -63,7 +63,7 @@
     <string name="sold_product">SoldProducts</string>
     <string name="scan_new_barcode_in">Scan Product For Store</string>
     <string name="scan_new_barcode_out">Scan Product Out Of Store</string>
-    <string name="requsted_quantity_not_exist">The quantity requested is not available</string>
+    <string name="requested_quantity_not_exist">The quantity requested is not available</string>
     <string name="product_does_not_exist">This product does not exist at your Store!</string>
     <string name="no_product_in_product_list">The Product You Scanned Not Recognized Please Add It To Your  Product List</string>
     <string name="add_new_product_to_list">Add Product To The List</string>

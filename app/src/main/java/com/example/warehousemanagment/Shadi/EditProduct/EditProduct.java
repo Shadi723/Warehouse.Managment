@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,15 +37,16 @@ import java.util.Map;
 public class EditProduct extends Fragment implements View.OnClickListener {
 
     /////
-    TextView id, trademark;
-    EditText name, color, depth, width, height, weight, inner_count;
-    ImageView imageView;
-    Button saveUpdate;
+    private TextView id, trademark;
+    private EditText name, color, depth, width, height, weight, inner_count;
+    private ImageView imageView;
+    private Button saveUpdate;
 
     ///////
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
-    
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+
+
     ////////////
     private static final String TAG = "EditProduct";
 
@@ -56,6 +58,8 @@ public class EditProduct extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.edit_product_fragment_layout, container, false);
         id = view.findViewById(R.id.product_id);

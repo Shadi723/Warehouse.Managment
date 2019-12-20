@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -36,18 +37,19 @@ import java.util.Date;
 public class SaveToFirebaseOut extends Fragment implements View.OnClickListener {
 
     private String barcode_value;
-    TextView id,name,packgeIn,color, trademark;
-    EditText packageCount;
-    Button save;
-    ImageView imageView;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
-    ProductSettings settings;
-    int total_package;
-    float total_quantity;
+    private TextView id,name,packgeIn,color, trademark;
+    private EditText packageCount;
+    private Button save;
+    private ImageView imageView;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+    private ProductSettings settings;
+    private int total_package;
+    private float total_quantity;
     private static final String TAG = "SaveToFirebaseIn";
-    NavController navController;
+    private NavController navController;
 
+    private FragmentActivity fragmentActivity;
 
     public SaveToFirebaseOut() {
         // Required empty public constructor
@@ -57,6 +59,8 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        fragmentActivity = getActivity();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.save_to_firebase_out_fragment_layout, container, false);
         id = view.findViewById(R.id.product_id);
@@ -67,7 +71,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
         save = view.findViewById(R.id.save_product);
         imageView = view.findViewById(R.id.product_img);
         trademark = view.findViewById(R.id.product_trade);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(fragmentActivity, R.id.nav_host_fragment);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRef = firebaseDatabase.getReference();
         settings = getArguments().getParcelable("product");
@@ -161,7 +165,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                                         .setValue(sold);
                             }
                             else {
-                                Toast.makeText(getContext(),getContext().getString(R.string.requsted_quantity_not_exist),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), fragmentActivity.getString(R.string.requested_quantity_not_exist),Toast.LENGTH_LONG).show();
                             }
                         }
                     }

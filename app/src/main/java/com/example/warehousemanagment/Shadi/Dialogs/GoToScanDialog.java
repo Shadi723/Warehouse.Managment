@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -28,6 +29,7 @@ public class GoToScanDialog extends DialogFragment {
         // Required empty public constructor
     }
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.d(TAG, "onCreateDialog: dialog");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

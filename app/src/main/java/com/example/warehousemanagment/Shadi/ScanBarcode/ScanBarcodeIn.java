@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -37,14 +38,14 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
     private ZXingScannerView mScannerView;
     private static final String TAG = "AddNewProduct";
     private String [] parts;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.scan_barode_in_fragment_layout,container,false);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         return view;
     }
 

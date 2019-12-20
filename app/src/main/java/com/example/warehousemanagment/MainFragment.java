@@ -15,33 +15,41 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
-    NavController navController;
-    Button addToStore, sellProduct, addNewProduct,addNewTrademark, editProduct;
+
+    private NavController navController;
+    private Button addToStore, sellProduct, addNewProduct,addNewTrademark, editProduct;
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClass;
 
+    private FragmentActivity fragmentActivity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        fragmentActivity = getActivity();
         View view = inflater.inflate(R.layout.main_fragment,container,false);
-        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(fragmentActivity,R.id.nav_host_fragment);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fragmentActivity = getActivity();
+
         addToStore = view.findViewById(R.id.ScanBarcodeIn);
         sellProduct = view.findViewById(R.id.ScanBarcodeOut);
         addNewProduct = view.findViewById(R.id.addNewProduct);
         addNewTrademark = view.findViewById(R.id.addNewTrademark);
         editProduct= view.findViewById(R.id.editProduct);
-        checkPermession();
+        checkPermission();
         addToStore.setOnClickListener(this);
         sellProduct.setOnClickListener(this);
         addNewProduct.setOnClickListener(this);
@@ -67,15 +75,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void checkPermession() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(fragmentActivity, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
+            ActivityCompat.requestPermissions(fragmentActivity,
                     new String[]{Manifest.permission.CAMERA}, ZXING_CAMERA_PERMISSION);
         }
     }
     @Override
-    public void onRequestPermissionsResult(int requestCode,  String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String [] permissions, @NonNull int [] grantResults) {
         switch (requestCode) {
             case ZXING_CAMERA_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -86,7 +94,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 } else {
                     Toast.makeText(getActivity(), "Please grant camera permission to use the QR Scanner", Toast.LENGTH_SHORT).show();
                 }
-                return;
         }
     }
 }
