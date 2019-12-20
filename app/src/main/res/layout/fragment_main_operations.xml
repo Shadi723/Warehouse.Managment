@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ali.MainOverViewFragment">
+    tools:context=".ali.MainOverViewFragment"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/layout_cards_container"
@@ -20,6 +21,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_add_product"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -41,13 +43,14 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/font_logo2"
-                        android:text="@string/card_header_incomes" />
+                        android:text="@string/add_new_product_to_list" />
 
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_scan_product_in"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -69,7 +72,7 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/font_logo2"
-                        android:text="@string/card_header_incomes" />
+                        android:text="@string/scan_new_barcode_in" />
 
                 </RelativeLayout>
 
@@ -84,6 +87,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_scan_product_out"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -105,13 +109,14 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/font_logo2"
-                        android:text="@string/card_header_incomes" />
+                        android:text="@string/scan_new_barcode_out" />
 
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_add_new_trademark"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -133,7 +138,7 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/font_logo2"
-                        android:text="@string/card_header_incomes" />
+                        android:text="@string/add_new_trademark" />
 
                 </RelativeLayout>
 
@@ -148,6 +153,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_edit_product"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -169,7 +175,7 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/font_logo2"
-                        android:text="@string/card_header_incomes" />
+                        android:text="@string/edit_product" />
 
                 </RelativeLayout>
 

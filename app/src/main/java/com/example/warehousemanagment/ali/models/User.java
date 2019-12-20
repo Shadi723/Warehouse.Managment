@@ -6,7 +6,7 @@ public class User {
     private String name;
     private String userName;
     private String email;
-    private String permissions;
+    private String permission;
     private String company;
 
     public User() {
@@ -16,13 +16,13 @@ public class User {
         email = null;
     }
 
-    public User(int id, String name, String userName, String email, String permissions, String company) {
+    public User(int id, String name, String userName, String email, String permission, String company) {
 
         this.id = id;
         this.name = name;
         this.userName = userName;
         this.email = email;
-        this.permissions = permissions;
+        this.permission = permission;
         this.company = company;
     }
 
@@ -42,8 +42,8 @@ public class User {
         return email;
     }
 
-    public String getPermissions() {
-        return permissions;
+    public String getPermission() {
+        return permission;
     }
 
     public String getCompany() {

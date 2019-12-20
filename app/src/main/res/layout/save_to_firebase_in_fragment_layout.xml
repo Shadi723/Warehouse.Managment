@@ -1,143 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
+
+        <LinearLayout
+            android:id="@+id/relativeLayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/product_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relativeLayout1"
-                android:layout_marginTop="50dp"
-                android:orientation="vertical">
-                // Apply as the background of TextView
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/product_id"
-                    android:layout_gravity="center"
-                    android:text="@string/product_id"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/product_name"
-                    android:layout_gravity="center"
-                    android:text="@string/product_name"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/product_color"
-                    android:layout_gravity="center"
-                    android:text="@string/product_color"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/product_trade"
-                    android:layout_gravity="center"
-                    android:text="@string/product_trade"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:id="@+id/inner_count"
-                    android:text="@string/inside_package_count"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/package_count"
-                    android:layout_gravity="center"
-                    android:hint="@string/package_count"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:inputType="number"
-                    android:digits="1023456789"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-                <Button
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/save_product"
-                    android:layout_gravity="center"
-                    android:text="@string/save_product"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_rounded_grey_inside"
-                    android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_standard"
+                android:text="@string/product_id"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/relativeLayout1"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="81dp"
-                android:layout_marginLeft="81dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginRight="80dp"
-                android:layout_marginBottom="80dp">
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_standard"
+                android:text="@string/product_name"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <ProgressBar
-                    android:id="@+id/loading"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/product_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_standard"
+                android:text="@string/product_color"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/product_img"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:clickable="true"
-                    android:src="@drawable/ic_image_sample" />
+            <TextView
+                android:id="@+id/product_trade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_standard"
+                android:text="@string/product_trade"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/inner_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_standard"
+                android:text="@string/inside_package_count"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/package_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_standard"
+                android:digits="1023456789"
+                android:hint="@string/package_count"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/save_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_primary_states"
+                android:text="@string/save_product"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="81dp"
+            android:layout_marginLeft="81dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="80dp">
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/product_img"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:contentDescription="@string/cont_desc_product_image"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_image_sample" />
 
         </RelativeLayout>
-    </ScrollView>
 
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@+id/mainFragment2">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.warehousemanagment.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_scanBarcodeIn"
             app:destination="@id/scanBarcodeIn" />
@@ -25,11 +25,72 @@
             android:id="@+id/action_mainFragment_to_searchForProduct"
             app:destination="@id/searchForProduct" />
     </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment2"
+        android:name="com.example.warehousemanagment.MainFragment2"
+        android:label="MainFragment2">
+        <action
+            android:id="@+id/action_mainFragment_to_scanBarcodeIn"
+            app:destination="@id/scanBarcodeIn" />
+        <action
+            android:id="@+id/action_mainFragment_to_scanBarcodeOut"
+            app:destination="@id/scanBarcodeOut" />
+        <action
+            android:id="@+id/action_mainFragment_to_addNewProduct"
+            app:destination="@id/addNewProduct" />
+        <action
+            android:id="@+id/action_mainFragment_to_addNewTrademark"
+            app:destination="@id/addNewTrademark" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchForProduct"
+            app:destination="@id/searchForProduct" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainOverView"
+        android:name="com.example.warehousemanagment.ali.MainOverViewFragment"
+        android:label="mainOverView">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainOperation"
+        android:name="com.example.warehousemanagment.ali.MainOperationsFragment"
+        android:label="mainOperation">
+
+        <action
+            android:id="@+id/action_mainOperation_to_addNewTrademark"
+            app:destination="@id/addNewTrademark" />
+        <action
+            android:id="@+id/action_mainOperation_to_searchForProduct"
+            app:destination="@id/searchForProduct" />
+        <action
+            android:id="@+id/action_mainOperation_to_scanBarcodeOut"
+            app:destination="@id/scanBarcodeOut" />
+        <action
+            android:id="@+id/action_mainOperation_to_editProduct"
+            app:destination="@id/editProduct" />
+        <action
+            android:id="@+id/action_mainOperation_to_scanBarcodeIn"
+            app:destination="@id/scanBarcodeIn" />
+        <action
+            android:id="@+id/action_mainOperation_to_saveToFirebaseOut"
+            app:destination="@id/saveToFirebaseOut" />
+        <action
+            android:id="@+id/action_mainOperation_to_editProduct2"
+            app:destination="@id/editProduct" />
+        <action
+            android:id="@+id/action_mainOperation_to_addNewProduct"
+            app:destination="@id/addNewProduct" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/scanBarcodeIn"
         android:name="com.example.warehousemanagment.Shadi.ScanBarcode.ScanBarcodeIn"
         android:label="scan_barode_in_fragment_layout"
-        tools:layout="@layout/scan_barode_in_fragment_layout" >
+        tools:layout="@layout/scan_barode_in_fragment_layout">
         <action
             android:id="@+id/action_scanBarcodeIn_to_saveToFirebaseIn"
             app:destination="@id/saveToFirebaseIn" />
@@ -41,7 +102,7 @@
         android:id="@+id/saveToFirebaseIn"
         android:name="com.example.warehousemanagment.Shadi.ScanBarcode.SaveToFirebaseIn"
         android:label="save_to_firebase_in_fragment_layout"
-        tools:layout="@layout/save_to_firebase_in_fragment_layout" >
+        tools:layout="@layout/save_to_firebase_in_fragment_layout">
         <action
             android:id="@+id/action_saveToFirebaseIn_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
@@ -61,7 +122,7 @@
         android:id="@+id/addNewProduct"
         android:name="com.example.warehousemanagment.Shadi.AddNewProduct.AddNewProduct"
         android:label="add_new_product_fragment_layout"
-        tools:layout="@layout/add_new_product_fragment_layout" >
+        tools:layout="@layout/add_new_product_fragment_layout">
         <action
             android:id="@+id/action_addNewProduct_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
@@ -69,7 +130,7 @@
     <dialog
         android:id="@+id/goToScanDialog"
         android:name="com.example.warehousemanagment.Shadi.Dialogs.GoToScanDialog"
-        android:label="GoToScanDialog" >
+        android:label="GoToScanDialog">
         <action
             android:id="@+id/action_goToScanDialog_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -81,7 +142,7 @@
         android:id="@+id/scanBarcodeOut"
         android:name="com.example.warehousemanagment.Shadi.ScanBarcode.ScanBarcodeOut"
         android:label="scan_barode_out_fragment_layout"
-        tools:layout="@layout/scan_barode_out_fragment_layout" >
+        tools:layout="@layout/scan_barode_out_fragment_layout">
         <action
             android:id="@+id/action_scanBarcodeOut_to_saveToFirebaseOut"
             app:destination="@id/saveToFirebaseOut" />
@@ -93,7 +154,7 @@
         android:id="@+id/saveToFirebaseOut"
         android:name="com.example.warehousemanagment.Shadi.ScanBarcode.SaveToFirebaseOut"
         android:label="save_to_firebase_out_fragment_layout"
-        tools:layout="@layout/save_to_firebase_out_fragment_layout" >
+        tools:layout="@layout/save_to_firebase_out_fragment_layout">
         <action
             android:id="@+id/action_saveToFirebaseOut_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
@@ -102,7 +163,7 @@
         android:id="@+id/addNewTrademark"
         android:name="com.example.warehousemanagment.Shadi.AddNewProduct.AddNewTrademark"
         android:label="add_new_trademark_fragment_layout"
-        tools:layout="@layout/add_new_trademark_fragment_layout" >
+        tools:layout="@layout/add_new_trademark_fragment_layout">
         <action
             android:id="@+id/action_addNewTrademark_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -111,7 +172,7 @@
         android:id="@+id/searchForProduct"
         android:name="com.example.warehousemanagment.Shadi.EditProduct.SearchForProduct"
         android:label="search_for_product_fragment_layout"
-        tools:layout="@layout/search_for_product_fragment_layout" >
+        tools:layout="@layout/search_for_product_fragment_layout">
         <action
             android:id="@+id/action_searchForProduct_to_editProduct"
             app:destination="@id/editProduct" />

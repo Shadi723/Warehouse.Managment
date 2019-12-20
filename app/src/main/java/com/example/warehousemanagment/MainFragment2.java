@@ -60,6 +60,7 @@ public class MainFragment2 extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+
     }
 
     private void initViews(View view) {

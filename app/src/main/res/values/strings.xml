@@ -6,6 +6,8 @@
     <string name="package_inside">Inner Package Count</string>
     <string name="package_count">Enter Package Number</string>
     <string name="save_product">Save</string>
+    <string name="cont_desc_product_image">Product Image</string>
+    <string name="cont_desc_nav_drawer">nav drawer</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Shadi Section -->
@@ -79,7 +81,7 @@
     <string name="save_update">Save Update</string>
     <string name="search_for_product">Search Product</string>
     <string name="save_update_product">Update Product</string>
-    <string name="error_loading_image">Error Occured While Loading Image</string>
+    <string name="error_loading_image">Error Occurred While Loading Image</string>
 
 
     <!-- ALi Section -->
