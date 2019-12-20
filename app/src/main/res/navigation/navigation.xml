@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainFragment2">
+    app:startDestination="@+id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.warehousemanagment.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_scanBarcodeIn"
             app:destination="@id/scanBarcodeIn" />
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/mainFragment2"
         android:name="com.example.warehousemanagment.MainFragment2"
-        android:label="MainFragment2" >
+        android:label="MainFragment2">
 
     </fragment>
 
@@ -34,7 +34,7 @@
         android:id="@+id/scanBarcodeIn"
         android:name="com.example.warehousemanagment.shadi.ScanBarcode.ScanBarcodeIn"
         android:label="scan_barode_in_fragment_layout"
-        tools:layout="@layout/scan_barode_in_fragment_layout" >
+        tools:layout="@layout/scan_barode_in_fragment_layout">
         <action
             android:id="@+id/action_scanBarcodeIn_to_saveToFirebaseIn"
             app:destination="@id/saveToFirebaseIn" />
@@ -46,7 +46,7 @@
         android:id="@+id/saveToFirebaseIn"
         android:name="com.example.warehousemanagment.shadi.ScanBarcode.SaveToFirebaseIn"
         android:label="save_to_firebase_in_fragment_layout"
-        tools:layout="@layout/save_to_firebase_in_fragment_layout" >
+        tools:layout="@layout/save_to_firebase_in_fragment_layout">
         <action
             android:id="@+id/action_saveToFirebaseIn_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
@@ -66,7 +66,7 @@
         android:id="@+id/addNewProduct"
         android:name="com.example.warehousemanagment.shadi.AddNewProduct.AddNewProduct"
         android:label="add_new_product_fragment_layout"
-        tools:layout="@layout/add_new_product_fragment_layout" >
+        tools:layout="@layout/add_new_product_fragment_layout">
         <action
             android:id="@+id/action_addNewProduct_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
@@ -75,7 +75,7 @@
     <dialog
         android:id="@+id/goToScanDialog"
         android:name="com.example.warehousemanagment.shadi.Dialogs.GoToScanDialog"
-        android:label="GoToScanDialog" >
+        android:label="GoToScanDialog">
         <action
             android:id="@+id/action_goToScanDialog_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -88,7 +88,7 @@
         android:id="@+id/scanBarcodeOut"
         android:name="com.example.warehousemanagment.shadi.ScanBarcode.ScanBarcodeOut"
         android:label="scan_barode_out_fragment_layout"
-        tools:layout="@layout/scan_barode_out_fragment_layout" >
+        tools:layout="@layout/scan_barode_out_fragment_layout">
         <action
             android:id="@+id/action_scanBarcodeOut_to_saveToFirebaseOut"
             app:destination="@id/saveToFirebaseOut" />
@@ -100,7 +100,7 @@
         android:id="@+id/saveToFirebaseOut"
         android:name="com.example.warehousemanagment.shadi.ScanBarcode.SaveToFirebaseOut"
         android:label="save_to_firebase_out_fragment_layout"
-        tools:layout="@layout/save_to_firebase_out_fragment_layout" >
+        tools:layout="@layout/save_to_firebase_out_fragment_layout">
         <action
             android:id="@+id/action_saveToFirebaseOut_to_goToScanDialog"
             app:destination="@id/goToScanDialog" />
@@ -109,7 +109,7 @@
         android:id="@+id/productsFragment"
         android:name="com.example.warehousemanagment.ali.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" >
+        tools:layout="@layout/fragment_products">
 
 
     </fragment>
