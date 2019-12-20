@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IStock Managment</string>
+    <string name="app_name">iStock Management</string>
     <string name="product_id">Product ID</string>
     <string name="product_name">Product Name</string>
     <string name="package_inside">Inner Package Count</string>
@@ -7,6 +7,7 @@
     <string name="save_product">Save</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <!-- Shadi Section -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="product_color">Product Color</string>
     <string name="company_name">NurIsPvc</string>
@@ -62,4 +63,34 @@
     <string name="requsted_quantity_not_exist">The quantity requested is not available</string>
     <string name="product_does_not_exist">This product does not exist at your Store!</string>
     <string name="no_product_in_product_list">The Product You Scanned Not Recognized Please Add It To Your  Product List</string>
+
+
+    <!-- ALi Section -->
+    <string name="splash_app_name">iStock\nManagement</string>
+    <string name="hint_edit_text_username">Username or Email</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_buy">Buy</string>
+    <string name="btn_reset_password">Send password reset email</string>
+
+    <string name="divider_or">OR</string>
+    <string name="hint_edit_text_password">Password</string>
+    <string name="hint_forgot_password"><u>Forgot Password ?</u></string>
+    <string name="hint_reset_password">Reset your password</string>
+
+    <string name="card_header_incomes">Incomes</string>
+    <string name="card_header_outcomes">Outcomes</string>
+    <string name="card_header_products">Products</string>
+    <string name="card_header_stock">Stock</string>
+
+    <string name="tab_over_view">Overview</string>
+    <string name="tab_operations">Operations</string>
+
+
+    <string name="toast_press_back_again_to_exit">Press back again to exit</string>
+    <string name="toast_empty_filed_wrong">Field can\'t be empty</string>
+    <string name="toast_enter_valid_password">please enter a valid password</string>
+    <string name="toast_check_your_data">please check your data</string>
+    <string name="toast_wrong_email_syntax">please enter a valid email address</string>
+    <string name="toast_reset_email_success">Reset email success</string>
+
 </resources>

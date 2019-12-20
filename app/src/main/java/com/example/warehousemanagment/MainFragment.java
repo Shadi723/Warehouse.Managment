@@ -20,7 +20,7 @@ import androidx.navigation.Navigation;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
     NavController navController;
-    Button addNewProduct, sellProduct;
+    Button addNewProduct, sellProduct, productsListBtn;
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClass;
 
@@ -38,9 +38,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         addNewProduct = view.findViewById(R.id.ScanBarcodeIn);
         sellProduct = view.findViewById(R.id.ScanBarcodeOut);
-        checkPermession();
+        productsListBtn = view.findViewById(R.id.btn_products_list);
+
+        checkPermission();
         addNewProduct.setOnClickListener(this);
         sellProduct.setOnClickListener(this);
+        productsListBtn.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -50,9 +53,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         if(v == sellProduct){
             navController.navigate(R.id.action_mainFragment_to_scanBarcodeOut);
         }
+        if(v == productsListBtn){
+            navController.navigate(R.id.action_mainFragment_to_productsFragment);
+        }
     }
 
-    public void checkPermession() {
+    public void checkPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),
