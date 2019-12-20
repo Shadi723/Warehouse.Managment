@@ -1,4 +1,4 @@
-package com.example.warehousemanagment.shadi.Utils;
+package com.example.warehousemanagment.Shadi.Utils;
 
 import android.Manifest;
 

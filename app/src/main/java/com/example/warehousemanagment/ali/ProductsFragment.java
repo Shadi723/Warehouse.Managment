@@ -15,7 +15,7 @@ import androidx.navigation.Navigation;
 
 import com.example.warehousemanagment.ali.utils.ProductAdapter;
 import com.example.warehousemanagment.R;
-import com.example.warehousemanagment.shadi.Models.Product;
+import com.example.warehousemanagment.Shadi.Models.Product;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

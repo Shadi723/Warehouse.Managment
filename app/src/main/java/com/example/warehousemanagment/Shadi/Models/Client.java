@@ -1,13 +1,13 @@
-package com.example.warehousemanagment.shadi.Models;
+package com.example.warehousemanagment.Shadi.Models;
 
-public class Seller {
+public class Client {
     private int id;
     private String name;
 
-    public Seller() {
+    public Client() {
     }
 
-    public Seller(int id, String name) {
+    public Client(int id, String name) {
         this.id = id;
         this.name = name;
     }

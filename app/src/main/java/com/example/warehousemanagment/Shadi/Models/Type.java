@@ -1,13 +1,13 @@
-package com.example.warehousemanagment.shadi.Models;
+package com.example.warehousemanagment.Shadi.Models;
 
-public class Trademark {
+public class Type {
     private int id;
     private String name;
 
-    public Trademark() {
+    public Type() {
     }
 
-    public Trademark(int id, String name) {
+    public Type(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -27,4 +27,5 @@ public class Trademark {
     public void setName(String name) {
         this.name = name;
     }
+
 }

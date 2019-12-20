@@ -1,15 +1,17 @@
-package com.example.warehousemanagment.shadi.Models;
+package com.example.warehousemanagment.Shadi.Models;
 
-public class Client {
+public class Trademark {
     private int id;
     private String name;
+    private String type;
 
-    public Client() {
+    public Trademark() {
     }
 
-    public Client(int id, String name) {
+    public Trademark(int id, String name, String type) {
         this.id = id;
         this.name = name;
+        this.type = type;
     }
 
     public int getId() {
@@ -26,5 +28,13 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -64,6 +64,22 @@
     <string name="requsted_quantity_not_exist">The quantity requested is not available</string>
     <string name="product_does_not_exist">This product does not exist at your Store!</string>
     <string name="no_product_in_product_list">The Product You Scanned Not Recognized Please Add It To Your  Product List</string>
+    <string name="add_new_product_to_list">Add Product To The List</string>
+    <string name="add_new_trademark">Add New Trademark</string>
+    <string name="trademark_id">Trademark ID</string>
+    <string name="trademark_name">Trademark Name</string>
+    <string name="field_types">Types</string>
+    <string name="please_wait_message">Please Wait</string>
+    <string name="please_select_type">Please Select Type</string>
+    <string name="please_select_trademark">Please Select Trademark</string>
+    <string name="please_enter_id">Please Enter Product Id</string>
+    <string name="successfully_founded">Product Founded!</string>
+    <string name="failed_to_find">Failed To Find Product</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="save_update">Save Update</string>
+    <string name="search_for_product">Search Product</string>
+    <string name="save_update_product">Update Product</string>
+    <string name="error_loading_image">Error Occured While Loading Image</string>
 
 
     <!-- ALi Section -->

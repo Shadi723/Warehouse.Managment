@@ -5,13 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.warehousemanagment.R;
-import com.example.warehousemanagment.shadi.Models.Product;
+import com.example.warehousemanagment.Shadi.Models.Product;
 
 import java.util.List;
 

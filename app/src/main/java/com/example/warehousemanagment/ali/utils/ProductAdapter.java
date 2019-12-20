@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.warehousemanagment.R;
-import com.example.warehousemanagment.shadi.Models.Product;
-import com.example.warehousemanagment.shadi.Utils.UniversalImageLoader;
+import com.example.warehousemanagment.Shadi.Models.Product;
+import com.example.warehousemanagment.Shadi.Utils.UniversalImageLoader;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -103,7 +103,7 @@ public class ProductAdapter extends BaseAdapter {
 
         if (currentItem != null){
 
-            UniversalImageLoader.setImage(currentItem.getImgUrl(), viewHolder.productImage,null,"");
+            //UniversalImageLoader.setImage(currentItem.getImgUrl(), viewHolder.productImage,null,"");
             viewHolder.productName.setText(currentItem.getName());
             viewHolder.productQuantity.setText(currentItem.getInner_count());
             viewHolder.productPrice.setText(currentItem.getCategory());

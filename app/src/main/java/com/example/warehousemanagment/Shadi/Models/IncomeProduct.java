@@ -1,4 +1,4 @@
-package com.example.warehousemanagment.shadi.Models;
+package com.example.warehousemanagment.Shadi.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

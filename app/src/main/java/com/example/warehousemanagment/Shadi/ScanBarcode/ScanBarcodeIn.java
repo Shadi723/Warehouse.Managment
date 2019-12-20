@@ -1,4 +1,4 @@
-package com.example.warehousemanagment.shadi.ScanBarcode;
+package com.example.warehousemanagment.Shadi.ScanBarcode;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,9 +14,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.warehousemanagment.R;
-import com.example.warehousemanagment.shadi.Models.Product;
-import com.example.warehousemanagment.shadi.Models.Trademark;
-import com.example.warehousemanagment.shadi.Models.ProductSettings;
+import com.example.warehousemanagment.Shadi.Models.Product;
+import com.example.warehousemanagment.Shadi.Models.Trademark;
+import com.example.warehousemanagment.Shadi.Models.ProductSettings;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

@@ -20,7 +20,7 @@ import androidx.navigation.Navigation;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
     NavController navController;
-    Button addNewProduct, sellProduct, productsListBtn;
+    Button addToStore, sellProduct, addNewProduct,addNewTrademark, editProduct;
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClass;
 
@@ -36,29 +36,38 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addNewProduct = view.findViewById(R.id.ScanBarcodeIn);
+        addToStore = view.findViewById(R.id.ScanBarcodeIn);
         sellProduct = view.findViewById(R.id.ScanBarcodeOut);
-        productsListBtn = view.findViewById(R.id.btn_products_list);
-
-        checkPermission();
-        addNewProduct.setOnClickListener(this);
+        addNewProduct = view.findViewById(R.id.addNewProduct);
+        addNewTrademark = view.findViewById(R.id.addNewTrademark);
+        editProduct= view.findViewById(R.id.editProduct);
+        checkPermession();
+        addToStore.setOnClickListener(this);
         sellProduct.setOnClickListener(this);
-        productsListBtn.setOnClickListener(this);
+        addNewProduct.setOnClickListener(this);
+        addNewTrademark.setOnClickListener(this);
+        editProduct.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
-        if(v == addNewProduct){
+        if(v == addToStore){
             navController.navigate(R.id.action_mainFragment_to_scanBarcodeIn);
         }
         if(v == sellProduct){
             navController.navigate(R.id.action_mainFragment_to_scanBarcodeOut);
         }
-        if(v == productsListBtn){
-            navController.navigate(R.id.action_mainFragment_to_productsFragment);
+        if(v == addNewProduct){
+            navController.navigate(R.id.action_mainFragment_to_addNewProduct);
+        }
+        if(v == addNewTrademark){
+            navController.navigate(R.id.action_mainFragment_to_addNewTrademark);
+        }
+        if(v == editProduct){
+            navController.navigate(R.id.action_mainFragment_to_searchForProduct);
         }
     }
 
-    public void checkPermission() {
+    public void checkPermession() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),

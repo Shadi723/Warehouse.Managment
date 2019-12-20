@@ -1,8 +1,9 @@
-package com.example.warehousemanagment.shadi.AddNewProduct;
+package com.example.warehousemanagment.Shadi.AddNewProduct;
 
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +23,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.warehousemanagment.R;
-import com.example.warehousemanagment.shadi.Models.Product;
-import com.example.warehousemanagment.shadi.Models.Trademark;
-import com.example.warehousemanagment.shadi.Utils.UniversalImageLoader;
+import com.example.warehousemanagment.Shadi.Models.Product;
+import com.example.warehousemanagment.Shadi.Models.Trademark;
+import com.example.warehousemanagment.Shadi.Utils.UniversalImageLoader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,7 +79,6 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
         save.setOnClickListener(this);
         img_load.setOnClickListener(this);
-        getTrademarks();
         return view;
     }
 
@@ -86,31 +87,48 @@ public class AddNewProduct extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRef = firebaseDatabase.getReference();
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
+        // The callback can be enabled or disabled here or in handleOnBackPressed()
+        getTrademarks();
         initImageLoader();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String code = getArguments().getString("ProductCode");
-        if(code != null) {
-            product_id.setText(code);
-            product_id.setFocusable(false);
+        try{
+            String code = getArguments().getString("ProductCode");
+            if(code != null) {
+                product_id.setText(code);
+                product_id.setFocusable(false);
+            }
+        }catch (NullPointerException e){
+            Log.e(TAG, "onViewCreated: " + e.toString() );
         }
+
     }
 
     private void getTrademarks(){
-        Query query = FirebaseDatabase.getInstance().getReference().child(getString(R.string.company_name))
+        Query query1 = FirebaseDatabase.getInstance().getReference().child(getString(R.string.company_name))
                 .child(getString(R.string.field_trademark));
-        query.addValueEventListener(new ValueEventListener() {
+        query1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> allTrades = new ArrayList<>();
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
                     String trademark;
-                    trademark = ds.getValue(Trademark.class).getName();
-                    allTrades.add(trademark);
-
+                    Log.d(TAG, "onDataChange: "+ds.getValue(Trademark.class).getType());
+                    if(ds.getValue(Trademark.class).getType().equals("Pvc Profile")){
+                        trademark = ds.getValue(Trademark.class).getName();
+                        allTrades.add(trademark);
+                    }
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),R.layout.spinner_simple_layout,allTrades);

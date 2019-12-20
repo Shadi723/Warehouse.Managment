@@ -2,17 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relativeLayout1"
                 android:layout_marginTop="50dp"
                 android:orientation="vertical">
                 // Apply as the background of TextView
@@ -28,24 +27,24 @@
                     android:background="@drawable/ic_rounded_grey_inside"
                     android:textColor="#000"
                     android:layout_marginBottom="15dp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/product_name"
                     android:layout_gravity="center"
-                    android:text="@string/product_name"
+                    android:hint="@string/product_name"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     android:background="@drawable/ic_rounded_grey_inside"
                     android:textColor="#000"
                     android:layout_marginBottom="15dp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/product_color"
                     android:layout_gravity="center"
-                    android:text="@string/product_color"
+                    android:hint="@string/product_color"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -64,12 +63,12 @@
                     android:background="@drawable/ic_rounded_grey_inside"
                     android:textColor="#000"
                     android:layout_marginBottom="15dp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:id="@+id/inner_count"
-                    android:text="@string/inside_package_count"
+                    android:id="@+id/product_depth"
+                    android:hint="@string/product_depth"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -79,65 +78,76 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/package_count"
                     android:layout_gravity="center"
-                    android:hint="@string/package_count"
+                    android:id="@+id/product_height"
+                    android:hint="@string/product_height"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:background="@drawable/ic_rounded_grey_inside"
+                    android:textColor="#000"
+                    android:layout_marginBottom="15dp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/product_width"
+                    android:hint="@string/product_width"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:background="@drawable/ic_rounded_grey_inside"
+                    android:textColor="#000"
+                    android:layout_marginBottom="15dp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/product_weight"
+                    android:hint="@string/product_weight_mt_ad"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:background="@drawable/ic_rounded_grey_inside"
+                    android:textColor="#000"
+                    android:layout_marginBottom="15dp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/package_inside"
+                    android:layout_gravity="center"
+                    android:hint="@string/package_inside"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:inputType="number"
-                    android:digits="1023456789"
+                    android:digits="123456789"
                     android:textAlignment="center"
                     android:background="@drawable/ic_rounded_grey_inside"
                     android:textColor="#000"
                     android:layout_marginBottom="15dp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/img_load"
+                    android:src="@drawable/ic_image_sample"
+                    android:clickable="true"
+                    android:background="@color/cardview_dark_background"/>
                 <Button
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/save_product"
+                    android:id="@+id/save_update_product"
                     android:layout_gravity="center"
-                    android:text="@string/save_product"
+                    android:text="@string/save_update_product"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     android:background="@drawable/ic_rounded_grey_inside"
                     android:textColor="#000"
-                    android:layout_marginBottom="15dp"/>
-
+                    android:layout_marginBottom="100dp"/>
 
             </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/relativeLayout1"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="81dp"
-                android:layout_marginLeft="81dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginRight="80dp"
-                android:layout_marginBottom="80dp">
-
-                <ProgressBar
-                    android:id="@+id/loading"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"/>
-
-                <ImageView
-                    android:id="@+id/product_img"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:clickable="true"
-                    android:src="@drawable/ic_image_sample" />
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 
 
 </RelativeLayout>
