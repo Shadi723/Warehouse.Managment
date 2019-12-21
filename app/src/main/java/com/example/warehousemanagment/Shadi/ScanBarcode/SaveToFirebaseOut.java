@@ -1,6 +1,5 @@
 package com.example.warehousemanagment.Shadi.ScanBarcode;
 
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,7 +36,7 @@ import java.util.Date;
 public class SaveToFirebaseOut extends Fragment implements View.OnClickListener {
 
     private String barcode_value;
-    private TextView id,name,packgeIn,color, trademark;
+    private TextView id, name, packageIn, color, trademark;
     private EditText packageCount;
     private Button save;
     private ImageView imageView;
@@ -66,7 +65,7 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
         id = view.findViewById(R.id.product_id);
         name = view.findViewById(R.id.product_name);
         color = view.findViewById(R.id.product_color);
-        packgeIn = view.findViewById(R.id.inner_count);
+        packageIn = view.findViewById(R.id.inner_count);
         packageCount = view.findViewById(R.id.package_count);
         save = view.findViewById(R.id.save_product);
         imageView = view.findViewById(R.id.product_img);
@@ -104,9 +103,9 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.save_product){
-            if(!packageCount.getText().toString().equals("") && !packgeIn.getText().toString().equals("")){
+            if(!packageCount.getText().toString().equals("") && !packageIn.getText().toString().equals("")){
                 final int count = Integer.parseInt(packageCount.getText().toString());
-                final float inner_count = Float.parseFloat((packgeIn.getText().toString()));
+                final float inner_count = Float.parseFloat((packageIn.getText().toString()));
                 Query query2 = FirebaseDatabase.getInstance().getReference(getString(R.string.company_name))
                         .child(getString(R.string.stock))
                         .child(settings.getTrademark().getName())
@@ -181,8 +180,8 @@ public class SaveToFirebaseOut extends Fragment implements View.OnClickListener 
                 if(packageCount.getText() == null){
                     packageCount.setError(getString(R.string.fill_package_count));
                 }
-                if(packgeIn.getText() == null){
-                    packgeIn.setError(getString(R.string.fill_inner_package));
+                if(packageIn.getText() == null){
+                    packageIn.setError(getString(R.string.fill_inner_package));
                 }
             }
         }

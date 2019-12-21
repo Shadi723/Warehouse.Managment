@@ -93,9 +93,12 @@ public class ResetPasswordDialog {
 
     private void showSuccessEmailSentMessage(){
 
+        String email = emailEditText.getText().toString();
+
         sendEmailBtn.setEnabled(false);
         emailEditText.setVisibility(View.INVISIBLE);
         dialogMessageTxtView.setVisibility(View.VISIBLE);
+        dialogMessageTxtView.append(" " + email);
     }
 
     private void setOnPositiveButtonClicked() {

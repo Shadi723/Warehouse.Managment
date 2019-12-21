@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -172,7 +171,7 @@ public class ScanBarcodeIn extends Fragment implements ZXingScannerView.ResultHa
                             product.setDepth(Float.parseFloat(objectMap.get(getString(R.string.field_depth)).toString()));
                             product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                             product.setType(objectMap.get(getString(R.string.field_type)).toString());
-                            product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
+                            product.setimgurl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                             product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
                             product.setTrademark(objectMap.get(getString(R.string.field_trademark)).toString());
                             product.setInner_count(Integer.parseInt(objectMap.get(getString(R.string.field_inner_count)).toString()));

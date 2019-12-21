@@ -1,4 +1,4 @@
-package com.example.warehousemanagment.ali;
+package com.example.warehousemanagment.ali.fragments;
 
 import android.content.Context;
 import android.net.Uri;

@@ -11,6 +11,7 @@
         android:text="All Products"
         android:textSize="24sp"
         android:padding="8dp"/>
+
     <ListView
         android:id="@+id/list_view_products"
         android:layout_width="match_parent"

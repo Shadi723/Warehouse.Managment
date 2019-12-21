@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -109,7 +108,7 @@ public class EditProduct extends Fragment implements View.OnClickListener {
                                     product.setKg(Float.parseFloat(objectMap.get(getString(R.string.field_kg)).toString()));
                                     product.setType(objectMap.get(getString(R.string.field_type)).toString());
                                     product.setTrademark(objectMap.get(getString(R.string.field_trademark)).toString());
-                                    product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
+                                    product.setimgurl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                                     product.setUnite(objectMap.get(getString(R.string.field_unite)).toString());
 
                                 }catch (NullPointerException e){

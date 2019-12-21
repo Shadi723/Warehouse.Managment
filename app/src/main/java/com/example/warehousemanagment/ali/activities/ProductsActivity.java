@@ -1,4 +1,4 @@
-package com.example.warehousemanagment;
+package com.example.warehousemanagment.ali.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.warehousemanagment.R;
 import com.example.warehousemanagment.Shadi.Models.Product;
 import com.example.warehousemanagment.utils.ProductsAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +45,7 @@ public class ProductsActivity extends AppCompatActivity {
        // initViews();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("ALI-COMPANY").child("Products");
+        databaseReference = firebaseDatabase.getReference(getResources().getString(R.string.company_name)).child("Products").child("Maxwin");
     }
 
     @Override

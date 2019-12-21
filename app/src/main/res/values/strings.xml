@@ -112,4 +112,6 @@
     <string name="toast_wrong_email_syntax">please enter a valid email address</string>
     <string name="toast_reset_email_success">Reset email success</string>
 
+    <string name="dialog_message_email_sent">An email has been sent to </string>
+
 </resources>

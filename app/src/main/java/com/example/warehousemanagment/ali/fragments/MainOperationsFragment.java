@@ -1,4 +1,4 @@
-package com.example.warehousemanagment.ali;
+package com.example.warehousemanagment.ali.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +25,7 @@ public class MainOperationsFragment extends Fragment implements View.OnClickList
     private CardView scanProductOutCardView;
     private CardView addTrademarkCardView;
     private CardView editProductCardView;
+    private CardView showProductsCardView;
 
     private NavController navController;
 
@@ -88,8 +89,14 @@ public class MainOperationsFragment extends Fragment implements View.OnClickList
 
         if (view == editProductCardView) {
 
-            navController.navigate(R.id.action_mainFragment_to_searchForProduct);
+            navController.navigate(R.id.action_mainOperation_to_editProduct);
         }
+
+        if (view == showProductsCardView) {
+
+            navController.navigate(R.id.action_mainOperation_to_productsFragment22);
+        }
+
     }
 
     private void initViews(View view) {
@@ -101,6 +108,7 @@ public class MainOperationsFragment extends Fragment implements View.OnClickList
         scanProductOutCardView = view.findViewById(R.id.cardView_scan_product_out);
         addTrademarkCardView = view.findViewById(R.id.cardView_add_new_trademark);
         editProductCardView = view.findViewById(R.id.cardView_edit_product);
+        showProductsCardView = view.findViewById(R.id.cardView_show_all_products);
     }
 
     private void setViewListener() {
@@ -110,6 +118,7 @@ public class MainOperationsFragment extends Fragment implements View.OnClickList
         scanProductOutCardView.setOnClickListener(this);
         addTrademarkCardView.setOnClickListener(this);
         editProductCardView.setOnClickListener(this);
+        showProductsCardView.setOnClickListener(this);
     }
 
 

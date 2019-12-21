@@ -115,7 +115,7 @@ public class Product implements Parcelable {
         return imgurl;
     }
 
-    public void setImgUrl(String imgurl) {
+    public void setimgurl(String imgurl) {
         this.imgurl = imgurl;
     }
 

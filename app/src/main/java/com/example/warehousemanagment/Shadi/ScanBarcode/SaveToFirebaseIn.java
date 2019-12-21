@@ -36,17 +36,17 @@ import java.util.Date;
 public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
 
     private String barcode_value;
-    TextView id,name,packgeIn,color, trademark;
-    EditText packageCount;
-    Button save;
-    ImageView imageView;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference mRef;
-    ProductSettings settings;
-    int total_package;
-    float total_quantity;
+    private TextView id,name,packgeIn,color, trademark;
+    private EditText packageCount;
+    private Button save;
+    private ImageView imageView;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mRef;
+    private ProductSettings settings;
+    private int total_package;
+    private float total_quantity;
     private static final String TAG = "SaveToFirebaseIn";
-    NavController navController;
+    private NavController navController;
 
 
     public SaveToFirebaseIn() {
@@ -90,7 +90,7 @@ public class SaveToFirebaseIn extends Fragment implements View.OnClickListener {
     }
 
     //Init views in layout
-    void init() {
+    private void init() {
         id.setText(String.valueOf(settings.getProduct().getId()));
         name.setText(settings.getProduct().getName());
         color.setText(settings.getProduct().getColor());

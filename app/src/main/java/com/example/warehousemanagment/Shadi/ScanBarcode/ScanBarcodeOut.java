@@ -209,7 +209,7 @@ public class ScanBarcodeOut extends Fragment implements ZXingScannerView.ResultH
                         product.setId(Integer.parseInt(objectMap.get(getString(R.string.field_id)).toString()));
                         product.setName(objectMap.get(getString(R.string.field_name)).toString());
                         product.setColor(objectMap.get(getString(R.string.field_color)).toString());
-                        product.setImgUrl(objectMap.get(getString(R.string.field_imgUrl)).toString());
+                        product.setimgurl(objectMap.get(getString(R.string.field_imgUrl)).toString());
                         product.setHeight(Float.parseFloat(objectMap.get(getString(R.string.field_height)).toString()));
                         product.setWidth(Float.parseFloat(objectMap.get(getString(R.string.field_width)).toString()));
                         product.setDepth(Float.parseFloat(parts[3])/product.getInner_count());

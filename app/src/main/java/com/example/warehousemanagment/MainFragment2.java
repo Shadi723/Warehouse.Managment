@@ -14,8 +14,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.warehousemanagment.ali.MainOperationsFragment;
-import com.example.warehousemanagment.ali.MainOverViewFragment;
+import com.example.warehousemanagment.ali.fragments.MainOperationsFragment;
+import com.example.warehousemanagment.ali.fragments.MainOverViewFragment;
+import com.example.warehousemanagment.ali.fragments.ProductsFragment;
 import com.example.warehousemanagment.ali.utils.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,6 +26,7 @@ public class MainFragment2 extends Fragment implements View.OnClickListener {
 
     private String firstTabName;
     private String secondTabName;
+    private String thirdTabName;
 
     private TabLayout tabLayout;
 
@@ -59,17 +61,20 @@ public class MainFragment2 extends Fragment implements View.OnClickListener {
 
         firstTabName = fragmentActivity.getResources().getString(R.string.tab_over_view);
         secondTabName = fragmentActivity.getResources().getString(R.string.tab_operations);
+        thirdTabName = "Products";
     }
 
     private void setUpViewPager(View view) {
 
         Fragment firstFragment = new MainOverViewFragment();
         Fragment secondFragment = new MainOperationsFragment();
+        Fragment thirdFragment = new ProductsFragment();
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(fragmentActivity.getSupportFragmentManager());
 
         sectionsPagerAdapter.addFragment(firstFragment);
         sectionsPagerAdapter.addFragment(secondFragment);
+        sectionsPagerAdapter.addFragment(thirdFragment);
 
 
         ViewPager viewPager = view.findViewById(R.id.container);
@@ -82,6 +87,7 @@ public class MainFragment2 extends Fragment implements View.OnClickListener {
 
         TabLayout.Tab firstTab = tabLayout.getTabAt(0);
         TabLayout.Tab secondTab = tabLayout.getTabAt(1);
+        TabLayout.Tab thirdTab = tabLayout.getTabAt(2);
 
         if (firstTab != null) {
             firstTab.setText(firstTabName);
@@ -91,6 +97,9 @@ public class MainFragment2 extends Fragment implements View.OnClickListener {
             secondTab.setText(secondTabName);
         }
 
+        if (thirdTab != null) {
+            thirdTab.setText(thirdTabName);
+        }
     }
 
 }

@@ -29,13 +29,13 @@ public class ProductAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater inflater;
-    private List<Product> productsList;
+    private List<ProductNew> productsList;
     private UniversalImageLoader universalImageLoader;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference stockDBReference;
 
-    public ProductAdapter (Context context, List<Product> productsList){
+    public ProductAdapter (Context context, List<ProductNew> productsList){
 
         mContext = context;
         inflater = LayoutInflater.from(mContext);
@@ -77,7 +77,7 @@ public class ProductAdapter extends BaseAdapter {
 
         View listItem = convertView;
 
-        Product currentItem = productsList.get(position);
+        ProductNew currentItem = productsList.get(position);
 
         final ViewHolder viewHolder;
 
@@ -105,8 +105,8 @@ public class ProductAdapter extends BaseAdapter {
 
             //UniversalImageLoader.setImage(currentItem.getImgUrl(), viewHolder.productImage,null,"");
             viewHolder.productName.setText(currentItem.getName());
-            viewHolder.productQuantity.setText(currentItem.getInner_count());
-            viewHolder.productPrice.setText(currentItem.getCategory());
+            viewHolder.productQuantity.setText(currentItem.getColor());
+            viewHolder.productPrice.setText(currentItem.getTrademark());
         }
 
         return listItem;
@@ -122,7 +122,7 @@ public class ProductAdapter extends BaseAdapter {
 
                     for (DataSnapshot companyProduct : companySnapshot.getChildren()){
 
-                        Product product = companyProduct.getValue(Product.class);
+                        ProductNew product = companyProduct.getValue(ProductNew.class);
                         productsList.add(product);
                     }
                 }

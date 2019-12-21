@@ -49,14 +49,14 @@
 
     <fragment
         android:id="@+id/mainOverView"
-        android:name="com.example.warehousemanagment.ali.MainOverViewFragment"
+        android:name="com.example.warehousemanagment.ali.fragments.MainOverViewFragment"
         android:label="mainOverView">
 
     </fragment>
 
     <fragment
         android:id="@+id/mainOperation"
-        android:name="com.example.warehousemanagment.ali.MainOperationsFragment"
+        android:name="com.example.warehousemanagment.ali.fragments.MainOperationsFragment"
         android:label="mainOperation">
 
         <action
@@ -78,11 +78,12 @@
             android:id="@+id/action_mainOperation_to_saveToFirebaseOut"
             app:destination="@id/saveToFirebaseOut" />
         <action
-            android:id="@+id/action_mainOperation_to_editProduct2"
-            app:destination="@id/editProduct" />
-        <action
             android:id="@+id/action_mainOperation_to_addNewProduct"
             app:destination="@id/addNewProduct" />
+        <action
+            android:id="@+id/action_mainOperation_to_productsFragment22"
+            app:destination="@id/productsFragment2" />
+
 
     </fragment>
 
@@ -182,4 +183,11 @@
         android:name="com.example.warehousemanagment.Shadi.EditProduct.EditProduct"
         android:label="edit_product_fragment_layout"
         tools:layout="@layout/edit_product_fragment_layout" />
+
+    <fragment
+        android:id="@+id/productsFragment2"
+        android:name="com.example.warehousemanagment.ali.fragments.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" />
+
 </navigation>
