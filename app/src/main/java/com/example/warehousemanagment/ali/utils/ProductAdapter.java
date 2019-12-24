@@ -103,7 +103,7 @@ public class ProductAdapter extends BaseAdapter {
 
         if (currentItem != null){
 
-            //UniversalImageLoader.setImage(currentItem.getImgUrl(), viewHolder.productImage,null,"");
+            UniversalImageLoader.setImage(currentItem.getImageurl(), viewHolder.productImage,viewHolder.progressBar,"");
             viewHolder.productName.setText(currentItem.getName());
             viewHolder.productQuantity.setText(currentItem.getColor());
             viewHolder.productPrice.setText(currentItem.getTrademark());
